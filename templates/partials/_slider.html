@@ -1,0 +1,33 @@
+{% load static %}
+<div class="main-slider">
+    <div id="main-slider" class="owl-carousel owl-theme">
+      <div class="item">
+          <div class="slide-caption slide-2">
+            <div class="container">
+              <h1>Site de Reservation en Ligne</h1>
+              <h3 class="text-light">BitMasters intègre le système Amadeus pour accéder à l'inventaire des vols, des hôtels, des voitures,des transferts et des croisières via les services Web fournis par Amadeus.</h3>
+              <input type="text" name="search" class="form-control" placeholder="recherche rapide..."><button class="btn-1">Rechercher</button>
+            </div>
+          </div>
+          <span class="simg"><img src="{% static 'amadeuspro/images/Banner.png' %}" alt="" style="max-height: 400px;"></span> 
+        </div>
+    </div>
+  </div>
+
+<!--  {% load static %}
+<div class="main-slider">
+    <div id="main-slider" class="owl-carousel owl-theme">
+      {% for slider in sliders %}
+      <div class="item">
+          <div class="slide-caption slide-2">
+            <div class="container">
+              <h1>{{ slider.caption }}</h1>
+              <h3>{{ slider.slogan }}</h3>
+              <input type="text" name="search" class="form-control" placeholder="recherche rapide..."><button class="btn-1">Rechercher</button>
+            </div>
+          </div>
+          <span class="simg"><img src="{{ slider.image.url }}" alt="" class="img-responsive" style="max-height: 600px;"></span>
+        </div>
+      {% endfor %}
+    </div>
+  </div> -->

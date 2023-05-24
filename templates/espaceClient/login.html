@@ -1,0 +1,26 @@
+{% include 'partials/_header.html' %}
+
+{% load static %}
+{% include 'partials/_css.html' %}
+
+<div class="centerArea">      
+              <div class="col-md-10 features-box">
+                <div class="card-body" style="background-image: url('../images/Banner.png'); ">
+                  <div>
+                  <label for="search" class="label label-warning">Nom Utilisateur</label>
+                  <br>
+                  <input type="text" name="search" class="form-control" placeholder="Username">
+                </div>
+                <br>
+              <div>
+                 <label for="search" class="label label-danger">Mot de Passe</label>
+                 <br>
+                  <input type="password" name="password" class="form-control" placeholder="Mot de Passe">
+                  <br>
+                  <center><button class="btn btn-primary">Se connecter</button></center>
+              </div>
+        </div>
+      </div>
+</div>
+
+{% include 'partials/_js.html' %}

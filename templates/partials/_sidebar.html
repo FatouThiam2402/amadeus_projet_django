@@ -1,0 +1,20 @@
+{% load static %}
+<div id="sidebar-wrapper">
+  <a id="menu-close" href="#" class="close toggle"><i class="fa fa-times" aria-hidden="true"></i></a>
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand"> <a href="">
+      <!-- <img src="{% static 'heartcare/images/footer-logo.png' %}" alt=""> -->
+      <h6 class="masterTitle"><span class="text-success">Bit</span><span class="text-info">Masters</span></h6>
+    </a> </li>
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'choixvol' %}"><i class="fa fa-2x fa-plane"></i> Vols </a></li>
+
+                <li><a href="{% url 'index' %}"><i class="fa fa-2x fa-bus"></i> Location autos </a></li>
+                <li><a href="{% url 'index' %}"><i class="fa fa-2x fa-hotel"></i> Hotel </a></li>
+
+                <li><a href="{% url 'contact' %}"><i class="fa fa-2x fa-phone"></i> Contact </a></li>
+    <li><a href="{% url 'inscription' %}">Inscription</a></li>
+    <li><a href="{% url 'login' %}">Connexion</a></li>
+
+  </ul>
+</div>
