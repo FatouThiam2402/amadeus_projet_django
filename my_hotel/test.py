@@ -1,21 +1,10 @@
 from django.db import models
-
- 
-  # try:
-  #     import django
-  # except Exception:
-  #     !pip install django
- 
- 
 import requests
 import json
 # import mysql.connector
-
-# import mysql.connector
-
-
-# conn = mysql.connector.connect(db='amadeus',user='Moussa',passwd='root123',host='localhost',port=3306)
-# cursor = conn.cursor()
+import MySQLdb
+conn = MySQLdb.connect(db='amadeus',user='Moussa',passwd='root',host='localhost',port='3306')
+cursor = conn.cursor()
 
 url = 'https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=PAR&radius=5&radiusUnit=KM&hotelSource=ALL'
 token = 'SWnX7s5gy22gZPefIMedSb8epGgZ'
@@ -37,7 +26,4 @@ if response .status_code == 200:
         print(hotel)
 else:
     print("404")
-    
-
-
 
