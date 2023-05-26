@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
-from .models import Slider
+#from .models import Slider
 from django.views.generic import ListView, DetailView, TemplateView
 
 
@@ -87,22 +87,22 @@ class ContactView(TemplateView):
 
         return redirect('contact')
 
-import requests
-from django.http import JsonResponse
-from .models import passager
+# import requests
+# from django.http import JsonResponse
+# from .models import passager
 
-def recuperer_donnees_json(request):
-    url_api = 'https://api.example.com/users'  # L'URL de l'API
-    response = requests.get(url_api)
-    if response.status_code == 200:
-        donnees_json = response.json()
-        for donnee in donnees_json:
-            utilisateur = Passager(
-                nom=donnee['nom'],
-                email=donnee['email'],
-                # autres champs du modèle utilisateur
-            )
-            utilisateur.save()
-        return JsonResponse({'message': 'Données insérées avec succès.'})
-    else:
-        return JsonResponse({'message': 'Erreur lors de la récupération des données JSON.'})
+# def recuperer_donnees_json(request):
+#     url_api = 'https://api.example.com/users'  # L'URL de l'API
+#     response = requests.get(url_api)
+#     if response.status_code == 200:
+#         donnees_json = response.json()
+#         for donnee in donnees_json:
+#             utilisateur = Passager(
+#                 nom=donnee['nom'],
+#                 email=donnee['email'],
+#                 # autres champs du modèle utilisateur
+#             )
+#             utilisateur.save()
+#         return JsonResponse({'message': 'Données insérées avec succès.'})
+#     else:
+#         return JsonResponse({'message': 'Erreur lors de la récupération des données JSON.'})
