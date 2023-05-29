@@ -1,0 +1,55 @@
+
+option{
+    width: 100px;
+  }
+
+.liste-chambre{
+    margin-top: 2%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crée 3 colonnes égales */
+    grid-gap: 10px; /* Espacement entre les images */
+    
+}
+
+.img-chambre>img{
+	width: 70%;
+  border-radius: 10%;
+    
+
+
+
+}  
+
+.une-chambre{
+  display: block;
+  flex-direction: column;
+  margin-left: 10%;
+}
+.nom-chambre{
+  color: black;
+  size: 12px;
+  font-style: oblique;
+  font-weight:bolder;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.les-titres{
+  font-family: 'Courier New', Courier, monospace;
+  font-weight:normal;
+}
+
+.btn-reserver{
+
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #074e7e;
+  color: #ffffff;
+  border-radius: 5px;
+ 
+}
+
+
+.btn-reserver:hover{
+  background-color: black;
+}

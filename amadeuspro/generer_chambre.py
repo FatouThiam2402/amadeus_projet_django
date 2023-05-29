@@ -5,9 +5,9 @@ from  datetime import datetime,timedelta
 idHotels = ["RDDKR117", "HSDKRAAL", "IQDKRTER", "TYDKRRAC","WKDKR563","TYDKRRHI","GWBJL253","SIBJL975","FGDKRLDN"]
 
 descriptions = ["Une chambre spacieuse avec une vue panoramique sur la ville.",
-               "Un havre de paix au cœur de la nature, idéal pour se détendre.",
-               "Un mélange d'élégance et de confort pour un séjour inoubliable.",
-               "Des équipements modernes et un décor raffiné pour un séjour luxueux.",
+               "Un havre de paix au cœur de la nature, ideal pour se detendre.",
+               "Un melange d_elegance et de confort pour un sejour inoubliable.",
+               "Des equipements modernes et un decor raffine pour un sejour luxueux.",
                "Une chambre accueillante et chaleureuse pour se sentir comme chez soi."
                ]
 
@@ -19,17 +19,15 @@ def generer_prix_chambre(min_prix, max_prix):
     return random.randint(min_prix, max_prix)
 
 # liste  image des chambres
-images = ["static/images/img_chambre/chambre1.jpg",
-          "static/images/img_chambre/chambre2.jpg",
-          "static/images/img_chambre/chambre3.jpg",
-          "static/images/img_chambre/chambre4.jpeg",
-          "static/images/img_chambre/chambre6.jpeg",
-          "static/images/img_chambre/chambre7.jpg",
-          "static/images/img_chambre/chambre8.jpg",
-          "static/images/img_chambre/chambre9.jpg"
+images = ["amadeuspro/images/img_chambre/chambre1.jpg",
+          "amadeuspro/images/img_chambre/chambre2.jpg",
+          "amadeuspro/images/img_chambre/chambre3.jpg",
+          "amadeuspro/images/img_chambre/Chambre6.jpeg",
+          "amadeuspro/images/img_chambre/chambre7.jpg",
+          "amadeuspro/images/img_chambre/chambre8.jpg",
+          "amadeuspro/images/img_chambre/chambre9.jpg"
     
 ]
-
 
 
 
@@ -41,7 +39,7 @@ for _ in range(100):
     idhotel = random.choice(idHotels)
     description = random.choice(descriptions)
     nom_ch = random.choice(nom_chambres)
-    prix_ch = generer_prix_chambre(10000,50000)
+    prix_ch = generer_prix_chambre(15000,100000)
     img = random.choice(images)
 
     chambre = {

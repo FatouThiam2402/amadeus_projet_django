@@ -554,7 +554,9 @@ body .tp0 {
 	padding: 100px 0 100px;
 	background-color: #bf0311;
 	z-index: 0;
-}
+}	
+
+
 
 .inner-banner:after {
 	background: url(../images/patt.png);
@@ -4078,3 +4080,4 @@ body select:focus {
 .contact-address .add-text strong {
 	display: block;
 }
+

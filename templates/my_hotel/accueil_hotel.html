@@ -1,0 +1,139 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block maincontent %}
+
+<!--inner banner-->
+
+<link href="{% static 'amadeuspro/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'amadeuspro/css/style_hotel.css' %}" rel="stylesheet">
+
+<div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Service de Reservation de Chambres</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'index' %}">Acceuil</a></li>
+          <!-- <li class="active">Vols</li> -->
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!--inner banner End-->
+
+<!--Main Content Start-->
+<div class="container-fluid">
+<div class="main-content padding-0">
+  <section class="appointment-form zoneRechercheVol brad">
+    <form id="flight-form" onsubmit="return validateForm()">
+        <div class="row">
+          <br><br>
+        </div>
+
+        <div class="row">
+             <div class="col-md-2 form-group align-items-start flex-column">
+               <span class="badge badge-primay"> Information</span>
+          </div>
+          <div class="col-md-2 form-group align-items-start flex-column">
+                        <label for="origin" class="d-inline-flex">Pays</label>
+                        <select class="form-select-hotel" id="pays">
+          
+                            <option value="" desabled selected >Pays</option>
+                            <option value="option2">Sénégal</option>
+                            <option value="option3">Paris</option>
+                         </select>
+                         
+                        <div id="fromLocationData"></div>
+                
+          </div>
+
+          <div class="form-group col-md-2 align-items-start flex-column">
+                        <label for="depart" class="d-inline-flex">Ville</label>
+                        <select class="form-select-hotel" id="pays">
+          
+                          <option value="" desabled selected >Ville</option>
+                          <option value="option2">Sénégal</option>
+                          <option value="option3">Paris</option>
+                       </select>
+                        <div id="toLocationData"></div>
+            </div>
+
+          <div class="form-group col-md-2 align-items-start flex-column">
+                        <label for="departure-date" class=" d-inline-flex">Personne</label>
+                        <select class="form-select-hotel" id="type_personne">
+          
+                          <option value="" desabled selected >Type Personne</option>
+                          <option value="option1">Enfants</option>
+                          <option value="option2">Adultes</option>
+                          <option value="option3">vieux</option>
+                        </select>
+            </div>
+
+            <center><button class="btn btn-info" onclick="handleFindFlight()">Rechercher</button></center>
+
+
+        </div>
+
+              <br><br>
+
+            </div>
+               
+             </div> 
+         </div>
+    </form>
+  </section>
+</div> 
+
+<div class="liste-chambre">
+  {% for chambre in chambres %}
+  {% if forloop.counter <= 9 %}
+  <div class="une-chambre">
+    <div class="img-chambre">
+      <img src="{% static chambre.3 %} "/>
+      
+    </div>
+
+    <div class="nom-chambre"><span class="les-titres">Hotel: </span>{{ chambre.4 }}</div>
+    <div class="nom-chambre"><span class="les-titres">nom chambre : </span>{{ chambre.0 }}</div>
+    <div class="nom-chambre"><span class="les-titres">prix chambre : </span>{{ chambre.2 }} F  <input type="button" name="reserver" value="RESERVER" class="btn-reserver"></div>
+   
+
+</div>
+
+  {% endif%}
+  {% endfor %}  
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+<br><br>
+
+<div class="container">
+<div class="row">
+        <div id="flightData">
+            
+        </div>
+</div>
+</div>
+
+<script src="{% static 'amadeuspro/js/script.js' %}"></script>
+  <script src="{% static 'amadeuspro/js/scriptvol.js' %}"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+
+<!--Main Content End-->
+{% endblock maincontent %}
