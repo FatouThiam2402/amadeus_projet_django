@@ -1,0 +1,14 @@
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(1,'AS',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(2,'AA',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(3,'US',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(4,'DL',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(5,'NK',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(6,'UA',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(7,'HA',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(8,'B6',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(9,'OO',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(10,'EV',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(11,'MQ',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(12,'F9',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(13,'WN',1);
+INSERT INTO compagnie (id, nomCompagnie, Service_id) values(14,'VX',1);
