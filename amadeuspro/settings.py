@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'inscription',
     'vols',
     'my_hotel',
+    'location_voiture'
 ]
 
 MIDDLEWARE = [

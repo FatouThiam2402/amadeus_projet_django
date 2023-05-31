@@ -1,0 +1,88 @@
+.auto1{
+    width: 100%;
+
+}
+.texte{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+    height: 100px;
+    margin-top: 10px;
+}
+.rectangle{
+    background-color: rgb(7, 7, 118);
+    width: 50%;
+    height: 200px;
+    margin-left: 500px;
+    border-radius: 30px;
+    
+}
+.text{
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+section h2 {
+    margin-top: 0;
+}
+
+form input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
+
+form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.car {
+    display: inline-block;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.car img {
+    width: 100%;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+

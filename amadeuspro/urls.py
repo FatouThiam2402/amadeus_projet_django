@@ -9,6 +9,7 @@ urlpatterns = [
     path('inscription/', include('inscription.urls')),
     path('vols/', include('vols.urls')),
     path('', include('espaceClient.urls')),
+    path('location_voiture/',include('location_voiture.urls')),
 ]
 
 if settings.DEBUG:
