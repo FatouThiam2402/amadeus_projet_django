@@ -9,6 +9,10 @@ urlpatterns = [
     path('inscription/', include('inscription.urls')),
     path('vols/', include('vols.urls')),
     path('', include('espaceClient.urls')),
+    path('my_hotel/', include('my_hotel.urls')),
+    path('reservation/', include('reservation.urls')),
+    path('accounts/', include('accounts.urls')),
+
 ]
 
 if settings.DEBUG:

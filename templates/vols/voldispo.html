@@ -1,0 +1,120 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block maincontent %}
+
+{% comment %} {% if messages %}
+<div class="alert alert-success text-center" id="alert-msg">
+  {% for message in messages %}
+  <h3>{{ message }}</h3>
+  {% endfor %}
+</div>
+{% endif %} {% endcomment %}
+
+
+{% include 'partials/_css.html' %}
+
+
+<div class="flightcover">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7 col-md-offset-5">
+             <button class='btn btn-warning pull-right'> <h4><a href="http://127.0.0.1:8000/vols/" class="text-info">Aller a la page de Recherche</a></h4></button>
+        </div>
+      </div>
+
+<div class="row">
+{% if results %}
+<div class="col-md-8 col-md-offset-2  mtop">
+  <div class="card shadow-black">
+    <div class="card-title"><center>
+        <h2 id="volinfo">Resultats de la recherche </h2>
+    </center></div>
+  <div class="card-body">
+  <div id="infoVol">
+      <div class="table-responsive">
+        <table id='infovolTab' class="table table-dark table-table-condensed table-hover dt-responsive nowrap">
+          <thead>
+            <tr class="table-info">
+                <th></th>
+                <th>Numero</th>
+                <th>Parti de</th>
+                <th>Depart</th>
+                <th>Arrivee a</th>
+                <th>Sieges Dispo</th>
+                <th>Reserver</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for rf in results %}
+              <tr>
+                <td></td>
+                <td>{{ rf.0 }}</td>
+                <td>{{ rf.4 }}</td>
+                <td>{{ rf.5 }}</td>
+                <td>{{ rf.6 }}</td>
+                <td>{{ rf.3 }}</td>
+                <td><button class="btn"> <a href="{% url 'paiement' rf.0 rf.4 rf.5 rf.6 rf.3 %}" class="text-white"><i class="fa fa-money"></i></a> </button></td>
+              </tr>
+
+        {% endfor %}
+        
+        </tbody>
+        <tfoot>
+          <tr class="table-info">
+            <th></th>
+            <th>Numero</th>
+            <th>Parti de</th>
+            <th>Depart</th>
+            <th>Arrivee a</th>
+            <th>Sieges Dispo</th>
+            <th>Reserver</th>
+        </tr>
+        </tfoot> 
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<br><br>
+{% endif %}
+</div>
+
+{% comment %} <script>
+  $('#infovolTab').DataTable({
+    columnDefs: [{
+        orderable: false,
+        targets: [5]
+    }],
+    lengthMenu: [
+        [25, 50, 100, -1],
+        [25, 50, 100, "All"]
+    ]
+});
+$(document).ready(function() {
+  var table = $('#example').DataTable( {
+      lengthChange: false,
+      buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+  } );
+
+  table.buttons().container()
+      .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+} );
+
+
+</script>  {% endcomment %}
+
+
+<div class="row">
+  {% if is_paginated %}
+  {% include 'partials/_paginationFlight.html' %}
+  {% endif %}
+</div>
+</div>
+
+{% include 'partials/_js.html' %}
+
+{% endblock maincontent %}

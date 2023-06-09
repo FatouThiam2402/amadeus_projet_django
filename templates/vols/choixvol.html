@@ -2,101 +2,89 @@
 {% load static %}
 {% block maincontent %}
 
-<!--inner banner-->
-{% if messages %}
+{% comment %} {% if messages %}
 <div class="alert alert-success text-center" id="alert-msg">
   {% for message in messages %}
   <h3>{{ message }}</h3>
   {% endfor %}
 </div>
-{% endif %}
+{% endif %}  {% endcomment %}
+
 <link href="{% static 'amadeuspro/css/style.css' %}" rel="stylesheet">
 
-<div class="inner-banner">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-7">
-        <h1>Service de Reservation de vols</h1>
-      </div>
-      <div class="col-md-5">
-        <ol class="breadcrumb">
-          <li><a href="{% url 'index' %}">Acceuil</a></li>
-          <li class="active">Vols</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</div>
-<!--inner banner End-->
+{% comment %} https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css {% endcomment %}
 
-<!--Main Content Start-->
+
+<div class="flightback">
 <div class="container-fluid">
-<div class="main-content padding-0">
-  <section class="appointment-form zoneRechercheVol brad">
-    <form id="flight-form" onsubmit="return validateForm()">
-        <div class="row">
-          <br><br>
-        </div>
-      <!-- <div class="row">
-          <div class="col-md-5"></div>
-          <div class="col-md-5">
-            <big><label for="allerSimple" class="label label-danger">Aller Simple</label></big>
-            <input type="radio" name="allerSimple">
-          </div>
-           <div class="col-md-3"> 
-            <big><label for="allerSimple" class="label label-success">Aller Retour</button></label></big>
-            <input type="radio" name="allerSimple">
-          </div>
-          <div class="col-md-2"></div>
-        </div>
 
-        <div class="row">
-          <br><br>
-        </div>
- -->
+<div class="row">
+<div class="col-md-10 col-md-offset-1 mt-auto">
+  <center><h1 class="text-light">Bienvenue dans la Plateforme de Reservation de Vols</h1></center>
+    <div class="main-content padding-0">
+  <section class="appointment-form colorTransparent">
+    <form method="POST" action="{% url 'toutLesVols' %}">
+          <br>
+          
+          {% csrf_token %}
+          <center><legend class='text-white'>Remplir le formulaire</legend></center>
         <div class="row">
              <div class="col-md-2 form-group align-items-start flex-column">
-               <span class="badge badge-primay"> Lieu et Date</span>
+               <h3 class="text-light"> Lieu </h3>
           </div>
-          <div class="col-md-2 form-group align-items-start flex-column">
+          <div class="col-md-4 form-group align-items-start flex-column">
                         <label for="origin" class="d-inline-flex">De</label>
-                        <input type="text" placeholder="Ville ou Aeroport" class="form-control" id="origin" name="origin"
-                            required>
+                        <input type="text" placeholder="Ville ou Aeroport" class="form-control" id="origin" name="origin" required>
                         <div id="fromLocationData"></div>
                 
           </div>
 
-          <div class="form-group col-md-2 align-items-start flex-column">
+          <div class="form-group col-md-4 align-items-start flex-column">
                         <label for="depart" class="d-inline-flex">Vers</label>
-                        <input type="text" placeholder="Ville ou Aeroport" class="form-control colorTransparent" id="depart" name="depart"
-                            required>
+                        <input type="text" placeholder="Ville ou Aeroport" class="form-control colorTransparent" id="destination" name="destination" required>
                         <div id="toLocationData"></div>
             </div>
 
-          <div class="form-group col-md-2 align-items-start flex-column">
-                        <label for="departure-date" class=" d-inline-flex">Depart</label>
-                        <input type="date" class="form-control" id="departure-date" name="departure-date"
-                            onkeydown="return false" required>
             </div>
 
 
-            <div class="form-group col-md-2 align-items-start flex-column">
-                        <label for="return-date" class="d-inline-flex">Retour</label>
-                        <input type="date" placeholder="One way" value=""
-                            onChange="this.setAttribute('value', this.value)" class="form-control" id="return-date"
-                            name="return-date">
+            <div class="row">
+              <br>
             </div>
 
-        </div>
+            <div class="row">
+                <div class="col-md-2 form-group align-items-start flex-column">
+               <h3 class="text-light"> Date </h3>
+                 </div>
+                  <div class="form-group col-md-4 align-items-start flex-column">
+                                <label for="departureDate" class=" d-inline-flex">Depart</label>
+                                <input type="date" class="form-control" placeholder="DateDepart" id="departureDate" name="departureDate"
+                                    onkeydown="return false">
+                    </div>
+
+
+                    {% comment %} <div class="form-group col-md-4 align-items-start flex-column">
+                                <label for="returnDate" class="d-inline-flex">Retour</label>
+                                <input type="date" placeholder="Dateretour" value=""
+                                   class="form-control" id="returnDate"
+                                    name="returnDate">
+                    </div> {% endcomment %}
+
+            </div>
+
+            <div class="row">
+              <br>
+            </div>
 
         <div class="row">
             <div class="col-md-2 form-group align-items-start flex-column">
-               <span class="badge badge-primay">  Passagers  </span>
+               <h3 class="text-light">  Passagers </h3>
           </div>
-            <div class="col-md-2 form-group align-items-start flex-column pull-left">
-              <label for="adults" class="d-inline-flex col-auto">Adultes <span class="sublabel"> 12+
+            {% comment %} <div class="form-group col-md-4 align-items-start flex-column">
+              <label for="adults" class="d-inline-flex">Adultes <span > 12+
                             </span></label>
-                        <select class="form-select" id="adults"
+                        <select class="form-select-lg" id="adults"
                             onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);">
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -108,9 +96,9 @@
                             <option value="8">8</option>
                             <option value="9">9</option>
                         </select>
-            </div>
+            </div> {% endcomment %}
 
-            <div class="col-md-2 form-group align-items-start flex-column pull-left">
+            {% comment %} <div class="col-md-4 form-group align-items-start flex-column">
             <label for="children" class="d-inline-flex col-auto">Enfants <span class="sublabel"> 2-11</span></label>
                         <select class="form-select" id="children">
                             <option value="0">0</option>
@@ -123,23 +111,25 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                         </select>
-            </div>
+            </div> {% endcomment %}
 
-            <div class="col-md-2 form-group align-items-start flex-column pull-left">
+            {% comment %} <div class="col-md-3 form-group align-items-start flex-column pull-left">
                         <label for="infants" class="d-inline-flex col-auto">Enfants 
                             <span class="sublabel"> Moins de 2</span></label>
                         <select class="form-select" id="infants">
                             <option value="0">0</option>
                             <option value="1">1</option>
                         </select>
-                    </div>
-        </div>
+            </div> {% endcomment %}
+             </div>
+
+
 
         <div class="row">
                     <div class="col-md-2 form-group align-items-start flex-column">
-                       <span class="badge badge-primay"> Type de Vol</span>
+                       <h3 class="text-light"> Vol</h3>
                   </div>
-                    <div class="form-group col-md-2 col-md-offset-1 align-items-start flex-column pull-left">
+                    <div class="form-group col-md-4 align-items-start flex-column">
                         <label for="cabin" class="d-inline-flex">Classe</label>
                         <select class="form-select" id="cabin">
                             <option value="ECONOMY">Economique</option>
@@ -148,42 +138,37 @@
                             <option value="FIRST">Premiere classe</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-2 align-items-start flex-column pt-lg-4 pull-left">
+                    <div class="form-group col-md-4  align-items-start flex-column">
                         <div class="form-check form-switch">
                             <input class="form-check-input align-self-center" type="checkbox" id="directFlights">
                             <label class="form-check-label d-inline-flex align-self-center" for="directFlights">Vol Direct</label>
                         </div>
                     </div>
-                </div>
-
-
-            <div class="row">
-                <div class="col-md-2 col-md-offset-5">
-                    <center><button class="btn btn-info" onclick="handleFindFlight()">Rechercher</button></center>
+        </div>
+        <div class="row">
+                <div class="col-md-4 col-md-offset-8">
+                    <center><button 
+                      class="btn btn-success btn-lg" 
+                      onclick="runFly()" 
+                      >Chercher</button></center>
               </div>
-            </div>
+        </div>
 
               <br><br>
 
-                </div>
-             </div> 
-         </div>
     </form>
-  </section>
-
-</div>     
+  </section> 
+</div>
+</div>
+</div>
 </div>
 <br><br>
-
-<div class="container">
-<div class="row">
-        <div id="flightData">
-            
-        </div>
+</div>
+</div>
 </div>
 </div>
 
-<script src="{% static 'amadeuspro/js/script.js' %}"></script>
+  <script src="{% static 'amadeuspro/js/script.js' %}"></script>
   <script src="{% static 'amadeuspro/js/scriptvol.js' %}"></script>
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -191,5 +176,4 @@
     crossorigin="anonymous"
   ></script>
 
-<!--Main Content End-->
 {% endblock maincontent %}

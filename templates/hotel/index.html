@@ -4,11 +4,11 @@
 <!--Main Content Start-->
 <div class="main-content">
   <!--Welcome Section-->
-  <section class="welcome-section">
-    <div class="container">
+  {% comment %} <section class="welcome-section">
+    <div class="container-fluid">
       <div class="row">
         <div class="welcome-box">
-          <div class="col-md-6">
+          <div class="col-md-4 col-md-offset-2">
             <div class="welcome-text">
               <div class="sectio-title-2"> <strong>Bienvenue dans votre site de reservation en ligne</strong>
               <h1 class="text-success">Bit</span><span class="text-info">Masters</h1>
@@ -26,17 +26,17 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
 
 
 
   <section class="home-features">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="section-title-3"> 
             <strong>Voir Nos Offres <i class="fa fa-home"></i> </strong>
           </div>
-        <div class="col-md-6 offre1 shadow-black">
+        <div class="col-md-5 col-md-offset-1 offre1 shadow-black">
           <p>Des Hotels de luxe</p>
           <br><br><br><br><br><br><br><br><br>
           <div>
@@ -45,8 +45,7 @@
           <br><br><br>
         </div>
 
-        <br><br>
-        <div class="col-md-5 col-md-offset-1 offre2 shadow-black">
+        <div class="col-md-4 col-md-offset-1 offre2 shadow-black">
           <p>Des voitures de qualite a votre service</p>
           <br><br><br><br><br><br><br><br><br>
           <div>
@@ -59,7 +58,7 @@
     </div>
   </section>
 
-<br><br><br><br><br>
+<br><br>
     <section class="home-features">
     <div class="container">
       <div class="row">
@@ -68,10 +67,10 @@
             <strong>Services de Voyages <i class="fa fa-plane"></i> </strong>
             <h2>Destinations prisees</h2>
           </div>
-          <a href="#"><h5 class="text-success pull-right">Voir Plus <i class="fa fa-hand-o-right"></i> </h5></a>
+          <a href="{% url 'galerie_vol' %}"><h5 class="text-success pull-right">Voir Plus <i class="fa fa-hand-o-right"></i> </h5></a>
         </div>
         
-         <div class="col-md-3 col-sm-3">
+         <div class="col-md-3 col-md-offset-0">
           <img class="imgWindow img-responsive shadow-green" src="{% static 'amadeuspro/images/roma.jpg' %}" alt="" >
           <div class="ser-content">
                     <center><h3><a href="#">Rome</a></h3></center>
@@ -79,7 +78,7 @@
                     tempor incididunt</p>
           </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3">
           <img class="imgWindow img-responsive shadow-green" src="{% static 'amadeuspro/images/paris.jpg' %}" alt="" >
           <div class="ser-content">
                     <center><h3><a href="#">Paris</a></h3></center>
@@ -87,7 +86,7 @@
                     tempor incididunt</p>
           </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3">
           <img class="imgWindow img-responsive shadow-green" src="{% static 'amadeuspro/images/barcelona_2.jpg' %}" alt="" >
           <div class="ser-content">
                     <center><h3><a href="#">Barcelone</a></h3></center>
@@ -95,7 +94,7 @@
                     tempor incididunt</p>
           </div>
         </div>
-        <div class="col-md-3 col-sm-3">
+        <div class="col-md-3">
           <img class="imgWindow img-responsive shadow-green" src="{% static 'amadeuspro/images/dakar.jpg' %}" alt="" >
           <div class="ser-content">
                     <center><h3><a href="#">Dakar</a></h3></center>
@@ -111,7 +110,7 @@
   <!--Welcome Section End-->
 
 
-  <br><br><br><br>
+  <br><br>
 
   <section class="home-features">
     <div class="container">
@@ -177,7 +176,7 @@
         </div>
 
          <div class="col-md-3 col-sm-3">
-          <img class="imgWindow img-responsive shadow-red" src="{% static 'amadeuspro/images/carlove.png' %}" alt="" >
+          <img class="imgWindow img-responsive shadow-red" src="{% static 'amadeuspro/images/inline-51723.jpg' %}" alt="" >
           <div class="ser-content">
                     <center><h3><a href="#">Range</a></h3></center>
                     <p>ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -216,9 +215,6 @@
   <!--Welcome Section End-->
 
 
-
-  
-
   <!--A propos de Nous-->
   <section class="mailservices">
     <div class="container">
@@ -238,10 +234,27 @@
     </div>
   </section>
   <!--Fin a propos-->
+  <div class="container-fluid">
+    <div class="row mtop30">
+      <h2 class='text-center'>Payer vos reservations avec nos partenaires</h2>
+      <br>
+      <div class="col-md-12">
+        <div class='col-md-1 col-md-offset-1'>
+          <img src="/media/operateurs/orangemoney.jpg" class='img img-thumbnail img-circle img-responsive' style='inline-size:150px;block-size:100px'>
+        </div>
+        <div class='col-md-1 col-md-offset-2'>
+          <img src="/media/operateurs/paypal.png" class='img img-thumbnail img-circle img-responsive' style='inline-size:150px;block-size:100px'>
+        </div>
+        <div class='col-md-1 col-md-offset-2'>
+          <img src="/media/operateurs/stripe.png" class='img img-thumbnail img-circle img-responsive' style='inline-size:150px;block-size:100px'>
+        </div>
+        <div class='col-md-1 col-md-offset-2'>
+          <img src="/media/operateurs/wave.jpeg" class='img img-thumbnail img-circle img-responsive' style='inline-size:150px;block-size:100px'>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <section class="home-services">
-    
-  </section>
 
 </div>
 <!--Main Content End-->

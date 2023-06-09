@@ -7,139 +7,138 @@ let flights = [];
 
 const fromLocationData = document.getElementById("fromLocationData");
 const toLocationData = document.getElementById("toLocationData");
-const flightData = document.getElementById("flightData");
-
+const flightData = document.getElementById("infoVol");
 
 
 function handleFromLocation() {
-  let locationEl = "";
-  const fromInput = document.getElementById("from").value;
-  if (fromInput.length > 1) {
-    fetch(`http://localhost:8000/vols/select_destination/${fromInput}`)
-      .then((response) => response.json())
-      .then((data) => (fromLocationArray = data.data));
+    let locationEl = "";
+    const fromInput = document.getElementById("from").value;
+    if (fromInput.length > 1) {
+        fetch(`http://localhost:8000/vols/select_destination/${fromInput}`)
+            .then((response) => response.json())
+            .then((data) => (fromLocationArray = data.data));
 
-    if (fromLocationArray) {
-      fromLocationData.style.display = "block";
-      fromLocationArray.map((location) => {
-        locationEl +=
-          '<div class="card mb-3 mt-3" onclick="getFromLocation(\'' +
-          location.iataCode +
-          '\')">\
+        if (fromLocationArray) {
+            fromLocationData.style.display = "block";
+            fromLocationArray.map((location) => {
+                locationEl +=
+                    '<div class="card mb-3 mt-3" onclick="getFromLocation(\'' +
+                    location.iataCode +
+                    '\')">\
           <div class="card-header"><b>Name:</b>  ' +
-          location.name +
-          ' </div>\
+                    location.name +
+                    ' </div>\
           <div class="card-body">\
             City Name:  ' +
-          location.address.cityName +
-          "\
+                    location.address.cityName +
+                    "\
             <br />\
                Country Name:  " +
-          location.address.countryName +
-          '\
+                    location.address.countryName +
+                    '\
           </div>\
           <div class="card-footer">\
             <b>SubType:</b>  ' +
-          location.subType +
-          " \
+                    location.subType +
+                    " \
           </div>\
         </div>";
-      });
+            });
+        }
     }
-  }
 
-  fromLocationData.innerHTML = locationEl;
+    fromLocationData.innerHTML = locationEl;
 }
 
 function getFromLocation(regionCode) {
-  originCode = regionCode;
-  console.log(originCode);
-  fromLocationData.style.display = "none";
+    originCode = regionCode;
+    console.log(originCode);
+    fromLocationData.style.display = "none";
 }
 
 function handleToLocation() {
-  let locationEl = "";
-  const toInput = document.getElementById("to").value;
-  if (toInput.length > 1) {
-    fetch(`http://localhost:8000/vols/select_destination/${toInput}`)
-      .then((response) => response.json())
-      .then((data) => (toLocationArray = data.data));
+    let locationEl = "";
+    const toInput = document.getElementById("to").value;
+    if (toInput.length > 1) {
+        fetch(`http://localhost:8000/vols/select_destination/${toInput}`)
+            .then((response) => response.json())
+            .then((data) => (toLocationArray = data.data));
 
-    if (toLocationArray) {
-      toLocationData.style.display = "block";
-      toLocationArray.map((location) => {
-        locationEl +=
-          '<div class="card mb-3 mt-3" onclick="getToLocation(\'' +
-          location.iataCode +
-          '\')">\
+        if (toLocationArray) {
+            toLocationData.style.display = "block";
+            toLocationArray.map((location) => {
+                locationEl +=
+                    '<div class="card mb-3 mt-3" onclick="getToLocation(\'' +
+                    location.iataCode +
+                    '\')">\
             <div class="card-header"><b>Name:</b>  ' +
-          location.name +
-          ' </div>\
+                    location.name +
+                    ' </div>\
             <div class="card-body">\
               City Name:  ' +
-          location.address.cityName +
-          "\
+                    location.address.cityName +
+                    "\
               <br />\
                  Country Name:  " +
-          location.address.countryName +
-          '\
+                    location.address.countryName +
+                    '\
             </div>\
             <div class="card-footer">\
               <b>SubType:</b>  ' +
-          location.subType +
-          " \
+                    location.subType +
+                    " \
             </div>\
           </div>";
-      });
+            });
+        }
     }
-  }
 
-  toLocationData.innerHTML = locationEl;
+    toLocationData.innerHTML = locationEl;
 }
 
 function getToLocation(regionCode) {
-  destinationCode = regionCode;
-  toLocationData.style.display = "none";
+    destinationCode = regionCode;
+    toLocationData.style.display = "none";
 }
 
-function handleFindFlight() {
-  departureDate = document.getElementById("date").value;
-  let flightEl = "";
+function gestionVols() {
+    departureDate = document.getElementById("date").value;
+    let flightEl = "";
 
-  fetch(
-    `http://localhost:8000/vols/search_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      flights = data.data;
+    fetch(
+            `http://localhost:8000/vols/search_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`
+        )
+        .then((response) => response.json())
+        .then((data) => {
+            flights = data.data;
 
-      if (flights) {
-        flights.map((flight) => {
-         console.log(flight)
-          flightEl +=
-            '\
+            if (flights) {
+                flights.map((flight) => {
+                    console.log(flight)
+                    flightEl +=
+                        '\
          <div class="card mb-3 mt-3" >\
          <div class="card-header">\
            <b>Prix:</b>  ' +
-            flight.price.total +
-            "  (\
+                        flight.price.total +
+                        "  (\
            " +
-            flight.price.currency +
-            ' )\
+                        flight.price.currency +
+                        ' )\
          </div>\
          <div class="card-body">\
            Nombre de sieges disponibles:  ' +
-            flight.numberOfBookableSeats +
-            "\
+                        flight.numberOfBookableSeats +
+                        "\
            <br />\
            Dernier Ticket Achete:  " +
-            flight.lastTicketingDate +
-            "\
+                        flight.lastTicketingDate +
+                        "\
            <hr />\
            <h5>Trajet</h5>\
            Duree:  " +
-            flight.itineraries[0].duration +
-            ' \
+                        flight.itineraries[0].duration +
+                        ' \
            <hr />\
            <h5>Entrez vos details:</h5>\
            <input type="text" id="first" placeholder="Votre Prenom" class="form-control"/>\
@@ -150,53 +149,57 @@ function handleFindFlight() {
            <button class="btn btn-primary" onclick="BookFlight(flight)">Chercher vol</button>\
          </div>\
        </div>'
+                });
+                flightData.innerHTML = flightEl;
+            } else {
+                flightData.innerHTML = "Aucune information de vol trouve";
+                alert("Aucune information de vol trouve");
+            }
         });
-        flightData.innerHTML = flightEl;
-      } else {
-        flightData.innerHTML = "Aucune information de vol trouve";
-        alert("Aucune information de vol trouve");
-      }
-    });
+}
+
+function afficherVols() {
+    document.getElementById("lorem").display = 'None';
 }
 
 function BookFlight(flight) {
-  const first = document.getElementById("first").value;
-  const last  = document.getElementById("last").value;
+    const first = document.getElementById("first").value;
+    const last = document.getElementById("last").value;
 
-  fetch("http://localhost:8000/vols/price_offers", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      flight,
-    }),
-  })
-    .then((response) => response.json())
-    .then((dataObject) => {
-      console.log("Success:", dataObject);
-
-      fetch("http://localhost:8000/vols/book_flight/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          flight,
-          traveler: { first, last },
-        }),
-      })
+    fetch("http://localhost:8000/vols/price_offers", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                flight,
+            }),
+        })
         .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          flights = [];
+        .then((dataObject) => {
+            console.log("Success:", dataObject);
+
+            fetch("http://localhost:8000/vols/book_flight/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        flight,
+                        traveler: { first, last },
+                    }),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                    flights = [];
+                })
+                .catch((error) => {
+                    alert(error);
+                });
         })
         .catch((error) => {
-          alert(error);
+            console.error("Error:", error);
+            alert(error);
         });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      alert(error);
-    });
 }
