@@ -2,13 +2,13 @@
 {% load static %}
 {% block maincontent %}
 <!--inner banner-->
-{% if messages %}
+{% comment %} {% if messages %}
 <div class="alert alert-success text-center" id="alert-msg">
   {% for message in messages %}
   <h3>{{ message }}</h3>
   {% endfor %}
 </div>
-{% endif %}
+{% endif %} {% endcomment %}
 
 <div class="inner-banner">
   <div class="container">
@@ -30,45 +30,74 @@
 <!--Main Content Start-->
 <div class="main-content padding-0">
   <section class="appointment-form">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6"><img src="{% static 'amadeuspro/images/Banner.png' %}" alt="" class="imgWindow img-responsive shadow-black"></div>
-        <div class="col-md-6">
+
+        <div class="col-md-5 col-md-offset-1"><img src="{% static 'amadeuspro/images/Banner.png' %}" alt="" class="imgWindow2 img-responsive shadow-black"></div>
+
+
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-header">Inscription
+              <span class='pull-right'>Deja Membre ?<span class="text-info"> <a href="{% url 'login' %}">Se connecter!</a> </span></span>
+            </div>
           <form action="{% url 'inscription' %}" method="post">
             {% csrf_token %}
-            <div class="app-form">
-              <div class="col-md-6 col-sm-6">
-                <input class="form-control" placeholder="Nom complet *" type="text" name="name">
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <input class="form-control" placeholder="Telephone *" type="text" name="phone">
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <input class="form-control" placeholder="Votre Email *" type="text" name="email">
-              </div>
-              <!-- <div class="col-md-6 col-sm-6">
-                <select name="doctor">
-                  <option disabled>--Doctor--</option>
-                  {% for doctor in doctors %}
-                  <option value="{{ doctor.id }}">{{ doctor.name }}</option>
-                  {% endfor %}
-                </select>
-              </div> -->
-              <div class="col-md-6 col-sm-6">
-                <div class="input-group date">
-                  <span class="input-group-addon"> <i class="fa fa-calendar" aria-hidden="true"></i> </span> 
-                  <input placeholder="Date *" name="date" class="form-control" type="date">
-                  </div>
-              </div>
+            <div class="card-body well">
 
-              <div class="col-md-12 text-center">
-                <textarea placeholder="Note Supplementaire" name="note"></textarea>
-                <input value="S'inscrire" type="submit">
-              </div>
-              <div class="col-md-6">
-                <br><br>
-              </div>
+                <div class="row mtop30">
+                  <div class="col-md-6">
+                    <input class="form-control" placeholder="Nom complet *" type="text" name="nom" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <input class="form-control" placeholder="Telephone *" type="text" name="phone" required>
+                  </div>
+                </div>
+
+
+                <div class="row mtop30">
+                  <div class="col-md-6 col-sm-6">
+                    <input class="form-control" placeholder="Votre Email *" type="text" name="email" required>
+                  </div>
+
+                  <div class="col-md-6 col-sm-6">
+                      <input placeholder="Date *" name="date" class="form-control" type="date">
+                  </div>
+                </div>
+
+                <div class="row mtop30">
+                  <div class="col-md-12">
+                    <input class='form-control' name="password1" type="password"  placeholder="votre mot de passe">
+                  </div>
+    
+                  <div class="col-md-12 mtop30">
+                    <input class='form-control' name="password2" type="password" placeholder="confimer votre mot de passe">
+                  </div>
+                </div>
+
+
+                <div class="row mtop30">
+                  <div class="col-md-12 text-center">
+                    <textarea placeholder="Adresse" name="adresse" class='form-control' rows='7'></textarea>
+                  </div>
+                </div>
+                
+                <div class='row mtop30'>
+                  <div class='col-md-4 col-md-offset-5'>
+                    <button class='btn btn-info' type="submit">S'inscrire</button>
+                  </div>
+                </div>
+                  <div class="card-footer">
+                  <div class="col-md-12 text-center">
+                    BitMasters , 2023
+                  </div>
+                </div>
+
+          </div>
+
             </div>
+          <br><br>
           </form>
         </div>
       </div>
