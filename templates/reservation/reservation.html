@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation de chambre d'hotel </title>
+    <link rel="stylesheet" href="{% static 'amadeuspro/css/style_hotel.css' %}">
+    <link rel="stylesheet" href="{% static 'amadeuspro/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'amadeuspro/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'amadeuspro/css/custom.css' %}">
+
+    
+
+</head>
+<body>
+    <!-- jumbotron -->
+     
+     
+
+        <div class="row">
+            <div class="col">
+                <div class="  card-header  bg-info h-50 ">
+                        
+                </div>
+            </div>
+            
+        </div>
+
+   
+
+    <div class="container-fluid" >
+       
+        
+            <!-- <div class="badge reserver_payer"> Réservation & Paiement</div> -->
+          <div class="row">
+
+            <div class="col-md-5 col-md-offset-1">
+
+                <div class="card mtop30">
+
+                   
+                    <div class=" card-header bg-info">
+                        <h3>Réservation<i class="fa fa-home"></i></h3>
+                    </div>
+                    <div class="card-body">
+                     <div class="col-md-5">
+                        <div class="bg-light p-3 mb-3">
+                            <label id="date-actuel"> Nom</label>
+                            <input type="text"  class="card-body well" name="date" value="Date actuelle"><br>
+                            
+                          </div>
+                          <div class="bg-light p-3 mb-3">
+                            <label id="date-sortie">Tel </label>
+                            <input type="text"  class="card-body well" name="date" value="date-sortie">
+                          </div>
+                          
+                     </div>
+                     <div class="col-md-5">
+                        <div class="bg-light p-3 mb-3">
+                            <label id="date-actuel"> Date Actuelle</label>
+                            <input type="date"  class="card-body well" name="date" value="Date actuelle"><br>
+                            
+                          </div>
+                          <div class="bg-light p-3 mb-3">
+                            <label id="date-sortie"> Date Sortie</label>
+                            <input type="date"  class="card-body well" name="date" value="date-sortie">
+                          </div>
+                          
+                     </div>
+                     <div class="col-md-5 col-md-offset-3">
+                        <div class="bg-light p-3 mb-3">
+                            <label id="date-sortie"> E-mail</label>
+                            <input type="text"  class="card-body well" name="date" value="date-sortie">
+                          </div>
+                     </div>
+                      
+                      
+                    </div>
+                    <div class="card-footer bg-secondary text-white">
+                      Pied de la carte
+                    </div>
+                  </div>
+
+            </div>
+                
+            <div class="card">
+                    <div class="bg-font  card-title  card-header bg-info">
+                        <h3>Paiement<i class="fa fa-home"></i></h3>
+                    </div>
+                    <div class="card-body">
+                <div class="col-md-5">
+                    <div class="bg-light p-3 mb-3">
+                        <label id="date-actuel"> Montant</label>
+                        <input type="text"  class="card-body well" name="date" value="à Payer"><br>
+                        
+                      </div>
+                      <div class="bg-light p-3 mb-3">
+                        <label id="date-sortie">Paiement</label>
+                        <select class="card-body well">
+                            <option value="Orange money">FCFA</option>
+                            <option value="Wave">EUROS</option>
+                            <option value="Free money"> DOLLAR</option>
+
+                        </select>
+                      </div>
+                </div>
+                      
+                      <div class="col-md-5">
+                        
+                       
+                          <div class="bg-light p-3 mb-3 ">
+                            <label id="date-sortie"> Opéra</label>
+                            <select class="card-body well">
+                                <option value="Orange money">Orange money</option>
+                                <option value="Wave">Wave</option>
+                                <option value="Free money">Free money</option>
+    
+                            </select>
+                          </div>
+                     </div>
+                     
+                      
+                    </div>
+                    <div class="col-md-5 col-md-offset-">
+                        <button class="btn btn-success" value="Paiement">valider Paiement</button>
+
+                     </div>
+                    <div class="card-footer bg-secondary text-white">
+                  
+                    </div>
+                 
+
+          
+          </div>
+            
+              
+           
+        </div>
+
+
+    <script src="#"></script>
+</body>
+</html>
+ 

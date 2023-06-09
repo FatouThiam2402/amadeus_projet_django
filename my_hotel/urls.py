@@ -9,6 +9,8 @@ app_name = "my_hotel"
 
 urlpatterns = [
     
-    path('',views.accueil, name = 'choixHotel'),
+    path('',views.accueil, name = 'accueil'),
+    path('reservation/',views.reserver, name = 'reserver'),
 
 ]  
+

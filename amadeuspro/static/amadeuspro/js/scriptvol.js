@@ -159,7 +159,7 @@ function handleFindFlight() {
     });
 }
 
-function BookFlight(flight) {
+function BookFlight(flight) {       
   const first = document.getElementById("first").value;
   const last  = document.getElementById("last").value;
 

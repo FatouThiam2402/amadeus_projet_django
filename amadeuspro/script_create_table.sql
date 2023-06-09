@@ -14,6 +14,7 @@ CREATE TABLE Client (
 	telephone varchar(200), 
 	email varchar(200), 
 	adresse varchar(200), 
+    date_naissance date,
 	dernierTicketAchete date 
     );
 
@@ -28,7 +29,8 @@ CREATE TABLE Personne (
 	typePersonne varchar(200)  , 
 	numeroCarte varchar(200)  , 
 	Pointage integer, 
-	estblackliste  bool
+	estblackliste  boolean,
+
     );
     
 
@@ -178,3 +180,4 @@ CREATE TABLE Volgenerique (
     Foreign key (aeroport_id) references Aeroport(id)
 
 );
+

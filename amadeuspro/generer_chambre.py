@@ -19,7 +19,7 @@ def generer_prix_chambre(min_prix, max_prix):
     return random.randint(min_prix, max_prix)
 
 # liste  image des chambres
-images = ["amadeuspro/images/img_chambre/chambre1.jpg",
+images = ["amadeuspro/images/img_chambre/chambre1.jpg", 
           "amadeuspro/images/img_chambre/chambre2.jpg",
           "amadeuspro/images/img_chambre/chambre3.jpg",
           "amadeuspro/images/img_chambre/Chambre6.jpeg",

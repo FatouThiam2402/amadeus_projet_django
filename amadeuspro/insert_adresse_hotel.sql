@@ -34,4 +34,6 @@
                 insert into Adresse(nomVille,pays,latitude,longitude) values('DKR','SN','14.35962','-14.46846');
             
                 insert into Hotel(idHotel,nom,adresse_id,service_id) values('FGDKRLDN','LODGE DU DELTA NIOMINKA-ILE DE DIONEWAR','9','3');
+
+                
             
