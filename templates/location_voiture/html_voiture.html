@@ -3,51 +3,134 @@
 {% load static %}
 {% block maincontent %}
 <link href="{% static 'amadeuspro/css/style_voiture.css' %}" rel="stylesheet">
-<img src="/static/amadeuspro/images/auto0.jpg" alt="" class="auto1"> 
-<div class="texte"><p class="texte">Recevez nos meilleurs offres pour vos locations de voitures</p></div>
-<div class="rectangle"><p class="text">Annulation gratuite</p></div>
-<div>
-<div class="barr">
-    <ul>
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Voitures</a></li>
-        <li><a href="#">Réservation</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
+<!-- <img src="/static/amadeuspro/images/auto0.jpg" alt="" class="auto1">  -->
+<!-- <div class="texte"><p class="texte">Recevez nos meilleurs offres pour vos locations de voitures</p></div>
+<div class="rectangle"><p class="text">Annulation gratuite</p></div> -->
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-3">
+    
+  <form action="/process_reservation" method="POST">
+    <!-- <label for="full_name">Nom complet :</label>
+    <input type="text" id="full_name" name="full_name" required><br><br>
+
+    <label for="email">Adresse e-mail :</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phone">Numéro de téléphone :</label>
+    <input type="text" id="phone" name="phone" required><br><br>
+
+    <label for="reservation_date">Date de réservation :</label>
+    <input type="date" id="reservation_date" name="reservation_date" required><br><br>
+
+    <label for="pickup_time">Heure de prise en charge :</label>
+    <input type="time" id="pickup_time" name="pickup_time" required><br><br>
+
+    <label for="return_time">Heure de retour :</label>
+    <input type="time" id="return_time" name="return_time" required><br><br> -->
+
+    <label for="pickup_location">Lieu de prise en charge :</label>
+    <input type="text" id="pickup_location" name="pickup_location" required><br><br>
+
+    <label for="return_location">Lieu de retour :</label>
+    <input type="text" id="return_location" name="return_location" required><br><br>
+
+    <label for="vehicle_type">Type de véhicule souhaité :</label>
+    <select id="vehicle_type" name="vehicle_type" required>
+      {%for car in voitures%}
+      <option value="{% static car.12 %}">"{% static car.12 %}"</option>
+      {% endfor %}
+      <!-- <option value="compact_car">Voiture compacte</option>
+      <option value="family_car">Voiture familiale</option>
+      <option value="suv">SUV</option>
+      <option value="van">Camionnette</option>
+      <option value="luxury_car">Voiture de luxe</option> -->
+    </select><br><br>
+
+    <label for="passenger_count">Nombre de passagers :</label>
+    <input type="number" id="passenger_count" name="passenger_count" required><br><br>
+    <label for="marque_existent">marque existent :</label>
+    <select name="marque" id="">
+      {%for car in voitures%}
+      <option value="{{car.1}}">"{{car.1}}"</option>
+      {% endfor %}
+    </select>
+  
+    <label for="prix">prix:</label>
+    <select name="prix" id="">
+    {%for car in voitures%}
+    <option value="{{car.10}}">prix:"{{car.10}}"</option>
+    {% endfor %}
+  </select>
+
+
+    <label for="modele">modele existent :</label>
+    <select name="modele" id="">
+      {%for car in voitures%}
+    <option value="{{car.2}}">"{{car.2}}"</option>
+    {% endfor %}
+    </select>
+    
+    <label for="couleur">couleur existent :</label>
+    <select name="couleur" id="">
+      {%for car in voitures%}
+      <option value="{{car.7}}">:"{{car.7}}"</option>
+      {% endfor %}
+    </select>
+    
+
+    <label for="additional_options">Options supplémentaires :</label><br>
+    <input type="checkbox" id="child_seat" name="additional_options" value="child_seat">
+    <label for="child_seat">Siège enfant</label><br>
+    <input type="checkbox" id="gps" name="additional_options" value="gps">
+    <label for="gps">GPS</label><br>
+    <input type="checkbox" id="insurance" name="additional_options" value="insurance">
+    <label for="insurance">Assurance supplémentaire</label><br><br>
+
+    <label for="comments">Commentaires ou demandes spéciales :</label><br>
+    <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br><br>
+
+    
+    <a href="Dossier personnel/Bureau/Basse_Donne/amadeus_projet_django/templates/location_voiture/bouton_reservation.html"> <input type="submit" value="Réserver" id="reserver"></a>
+    <script src="voiture.js"></script>
+  </form> 
+</div>
+
+<div class="col-md-9">
+
+  {%for car in voitures%}
+    
+    <div class="col-md-3">
+      <div class="card">
+        
+        <div class="card-body">
+      <img src="{% static car.12 %}" alt="" class="imgWindow img-responsive shadow-black">
+    </div>
+    <br>
+      <div class="card-footer">
+        <div class="propriete">
+      <ul>
+        <li>marque:"{{car.1}}"</li>
+        <li>modele:"{{car.2}}"</li>
+        <li>nombre_places:"{{car.3}}"</li>
+        <li>boite_vitesse:"{{car.4}}"</li>
+        <li>carburant:"{{car.5}}"</li>
+        <li>climatisation:"{{car.6}}"</li>
+        <li>couleur:"{{car.7}}"</li>
+        <li>annee_production:"{{car.8}}"</li>
+        <li>prix:"{{car.10}}"</li>
+        <button >choisissez_moi</button>
+      </ul>
+    </div>
+      <div class="card"></div>
+    </div> 
+    </div> 
+    </div>
+  {%endfor%}
+</div>
+</div>
 </div>
 
 
-<main>
-<section id="search">
-    <h2>Recherche de Voitures</h2>
-    <form class="formulaire">
-        <input type="text" placeholder="Lieu de prise en charge">
-        <input type="text" placeholder="Date et heure de prise en charge">
-        <input type="text" placeholder="Lieu de retour">
-        <input type="text" placeholder="Date et heure de retour">
-        <input type="submit" value="Rechercher">
-    </form>
-</section>
 
-<section id="featured-cars">
-    <h2>Voitures en Vedette</h2>
-    <div class="car">
-        <img src="auto3.jpeg" alt="Voiture 1">
-        <h3>Voiture 1</h3>
-        <p>Description de la voiture 1</p>
-        <a href="#">Réserver</a>
-    </div>
-    <div class="car">
-        <img src="auto5.jpg" alt="Voiture 2">
-        <h3>Voiture 2</h3>
-        <p>Description de la voiture 2</p>
-        <a href="#">Réserver</a>
-    </div>
-</section>
-</main>
-
-<footer>
-<p>&copy; 2023 Location de Voitures. Tous droits réservés.</p>
-</footer> 
- </div> -
 {% endblock maincontent %}

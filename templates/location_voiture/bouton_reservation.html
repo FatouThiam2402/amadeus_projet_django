@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reservation</title>
+    <link rel="stylesheet" href="style_voiture.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+            <script>
+                function validerReservation() {
+                  // Récupérer les valeurs des champs
+                  var nom = document.getElementById("nom").value;
+                  var email = document.getElementById("email").value;
+                  var telephone = document.getElementById("telephone").value;
+                  var adresse = document.getElementById("adresse").value;
+                  var dateDebut = document.getElementById("dateDebut").value;
+                  var dateFin = document.getElementById("dateFin").value;
+                  var heurePriseEnCharge = document.getElementById("heurePriseEnCharge").value;
+                  var heureRetour = document.getElementById("heureRetour").value;
+                  var typeVoiture = document.getElementById("typeVoiture").value;
+                  var siegeEnfant = document.getElementById("siegeEnfant").checked;
+                  var gps = document.getElementById("gps").checked;
+                  var assuranceSupplementaire = document.getElementById("assuranceSupplementaire").checked;
+                  var termesConditions = document.getElementById("termesConditions").checked;
+            
+                  // Effectuer les validations nécessaires
+                  if (nom === "" || email === "" || telephone === "" || adresse === "" || dateDebut === "" || dateFin === "" || heurePriseEnCharge === "" || heureRetour === "" || typeVoiture === "" || !termesConditions) {
+                    alert("Veuillez remplir tous les champs obligatoires et accepter les termes et conditions.");
+                    return false;
+                  }
+            
+                  // Effectuer la réservation de la voiture
+                  // Ajoutez ici votre code pour traiter la réservation de la voiture
+            
+                  alert("Réservation effectuée avec succès !");
+                  return true;
+                }
+              </script>
+            </head>
+            <body>
+                <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-6">
+              <h1>Réservation de voiture</h1>
+              <form onsubmit="return validerReservation()">
+                <h2>Informations personnelles</h2>
+                <label>Nom complet :</label>
+                <input type="text" id="nom" required><br><br>
+            
+                <label>Adresse e-mail :</label>
+                <input type="email" id="email" required><br><br>
+            
+                <label>Numéro de téléphone :</label>
+                <input type="text" id="telephone" required><br><br>
+            
+                <label>Adresse postale :</label>
+                <input type="text" id="adresse" required><br><br>
+            
+                <h2>Informations sur la réservation</h2>
+                <label>Date de début de location :</label>
+                <input type="date" id="dateDebut" required><br><br>
+            
+                <label>Date de fin de location :</label>
+                <input type="date" id="dateFin" required><br><br>
+            
+                <label>Heure de prise en charge :</label>
+                <input type="text" id="heurePriseEnCharge" required><br><br>
+            
+                <label>Heure de retour :</label>
+                <input type="text" id="heureRetour" required><br><br>
+            
+                <h2>Détails de la voiture</h2>
+                <label>Type de voiture :</label>
+                <select id="typeVoiture" required>
+                  <option value="">Sélectionnez un type</option>
+                  <option value="compacte">Compacte</option>
+                  <option value="berline">Berline</option>
+                  <option value="SUV">SUV</option>
+                </select><br><br>
+            
+                <label>Siège enfant :</label>
+                <input type="checkbox" id="siegeEnfant"><br><br>
+            
+                <label>GPS :</label>
+                <input type="checkbox" id="gps"><br><br>
+            
+                <label>Assurance supplémentaire :</label>
+                <input type="checkbox" id="assuranceSupplementaire"><br><br>
+            
+                <input type="checkbox" id="termesConditions" required>
+                <label for="termesConditions">J'accepte les termes et conditions</label><br><br>
+            
+                <input type="submit" value="Valider la réservation">
+              </form> 
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

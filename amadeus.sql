@@ -14,6 +14,7 @@ CREATE TABLE Client (
 	telephone varchar(200), 
 	email varchar(200), 
 	adresse varchar(200), 
+	date_naissance varchar(200),
 	dernierTicketAchete date 
     );
 
@@ -35,7 +36,7 @@ CREATE TABLE Personne (
 
 
 DROP TABLE IF EXISTS TypeOffre;
-CREATE TABLE TypeOffre(
+CREATE TABLE TypeOffre
 	id integer   PRIMARY KEY auto_increment, 
 	typeofr varchar(200)
     );
@@ -129,6 +130,7 @@ CREATE TABLE Voiture (
     matricule VARCHAR(100),
     prix real,
     id_Service int,
+    image VARCHAR(250),
     Foreign key (id_Service) references TypeOffre(id)
     
 );        
