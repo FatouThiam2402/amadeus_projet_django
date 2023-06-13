@@ -2,6 +2,31 @@
 {% load static %}
 {% block maincontent %}
 
+<style>
+  .query-data-div{
+    min-block-size: 11vh;
+    background-color: crimson;
+    background-image: linear-gradient(135deg, crimson, #b8017b);
+    display: flex;
+}
+.flight-price{
+  display: flex;
+  margin-inline-end: 15px;
+}
+.flight-price > h5{
+  margin-block-start: 20%;
+  margin-block-end: 20%;
+  font-weight: 600;
+}
+.price-range-output{
+  margin-block-start: 2px;
+  display: flex;
+  justify-content: space-between;
+  color: #808080;
+  font-size: .8em;
+}
+
+</style>
 {% comment %} {% if messages %}
 <div class="alert alert-success text-center" id="alert-msg">
   {% for message in messages %}
@@ -14,98 +39,203 @@
 {% include 'partials/_css.html' %}
 
 
-<div class="flightcover">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-7 col-md-offset-5">
-             <button class='btn btn-warning pull-right'> <h4><a href="http://127.0.0.1:8000/vols/" class="text-info">Aller a la page de Recherche</a></h4></button>
+{% if results %}
+
+<div class="container-fluid ">
+    <div class="row query-data-div mtop30">
+        <div class="col-md-12  ">
+          <div class='col-md-12'>
+          <center><h2 class='text-light'>Resultats de la recherche</h2></center>
+          </div>
+        
+             <div class='col-md-1 col-md-offset-1 mtop30'>
+              <h4 class='text-light'> De <br> {{origin}} </h4>
+             </div>
+             <div class='col-md-1 text-light mtop30' ><i class='fa fa-3x fa-hand-o-right'></i></div>
+             <div class='col-md-1 mtop30'>
+              <h4 class='text-light'> Vers <br> {{destination}} </h4>
+             </div>
+             <div class='col-md-2 col-md-offset-2 mtop30'>
+              <h4 class='text-light'> Date <br> {{depart}} </h4>
+             </div>
+             <div class='col-md-1 mtop30'>
+              <h4 class='text-light'> Classe<br> {{classe}} </h4>
+             </div>
+             <button class='btn pull-right mtop30 text-light' style='background:none;border:1px inset white;'> <a href="{% url 'choixvol' %}" class="text-light"><h4>Aller a la page de Recherche</h4></a></button>
         </div>
       </div>
+</div>
 
-<div class="row">
-{% if results %}
-<div class="col-md-8 col-md-offset-2  mtop">
-  <div class="card shadow-black">
-    <div class="card-title"><center>
-        <h2 id="volinfo">Resultats de la recherche </h2>
-    </center></div>
-  <div class="card-body">
-  <div id="infoVol">
-      <div class="table-responsive">
-        <table id='infovolTab' class="table table-dark table-table-condensed table-hover dt-responsive nowrap">
-          <thead>
-            <tr class="table-info">
-                <th></th>
-                <th>Numero</th>
-                <th>Parti de</th>
-                <th>Depart</th>
-                <th>Arrivee a</th>
-                <th>Sieges Dispo</th>
-                <th>Reserver</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for rf in results %}
-              <tr>
-                <td></td>
-                <td>{{ rf.0 }}</td>
-                <td>{{ rf.4 }}</td>
-                <td>{{ rf.5 }}</td>
-                <td>{{ rf.6 }}</td>
-                <td>{{ rf.3 }}</td>
-                <td><button class="btn"> <a href="{% url 'paiement' rf.0 rf.4 rf.5 rf.6 rf.3 %}" class="text-white"><i class="fa fa-money"></i></a> </button></td>
-              </tr>
+<div class="container-fluid ">
+<div class="row mtop30">
+  <div class="col-md-3 col-md-offset-1">
+    <div class='card mtop30 shadow-black'>
+      <div class='card-title'><h3 class='text-center text-info'>Filtrer vos recherches</h3></div>
+      <hr>
+      <div class='card-body text-center'>
 
-        {% endfor %}
-        
-        </tbody>
-        <tfoot>
-          <tr class="table-info">
-            <th></th>
-            <th>Numero</th>
-            <th>Parti de</th>
-            <th>Depart</th>
-            <th>Arrivee a</th>
-            <th>Sieges Dispo</th>
-            <th>Reserver</th>
-        </tr>
-        </tfoot> 
-        </table>
-      </div>
+
+       <div class='row'>
+      <div class="filter-box">
+        <div class="filter-price col-md-10 col-md-offset-1">
+            <div class="font-weight-bold">Price</div>
+            <div>
+                <input type="range" class="form-control-range" min="{{min_price}}" max="{{max_price}}" value="{{max_price}}" oninput="filter()">
+                <div class="price-range-output">
+                    <div class="initial-price-range">
+                        <span class="currency-symbol">₹</span>
+                        <span class="initial-price-value">{{min_price}}</span>
+                    </div>
+                    <div class="final-price-range">
+                        <span class="currency-symbol">₹</span>
+                        <span class="final-price-value"></span>
+                    </div>
+                </div>
+            </div>
+        </div><!---->
+        <div class="time-slot departure-time-slot-group col-md-10 col-md-offset-1 mtop30">
+            <div class="font-weight-bold">Depart </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div class="square-box" onclick="filter(this)" data-type="departure" data-start="0" data-end="6">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/morning_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/morning_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        Before 6 AM
+                    </div>
+                </div>
+                <div class="square-box" onclick="filter(this)" data-type="departure" data-start="6" data-end="12">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/noon_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/noon_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        6 am - 12 pm
+                    </div>
+                </div>
+                <div class="square-box" onclick="filter(this)" data-type="departure" data-start="12" data-end="18">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/evening_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/evening_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        12 pm - 6 pm
+                    </div>
+                </div>
+                <div class="square-box" onclick="filter(this)" data-type="departure" data-start="18" data-end="24">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/night_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/night_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        After 6 pm
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="time-slot arrival-time-slot-group col-md-10 col-md-offset-1 mtop30">
+            <div class="font-weight-bold">Arrivee</div>
+            <div style="display: flex; justify-content: space-between;">
+                <div class="square-box" onclick="filter(this)" data-type="arrival" data-start="0" data-end="6">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/morning_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/morning_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        Before 6 AM
+                    </div>
+                </div>
+                <div class="square-box" onclick="filter(this)" data-type="arrival" data-start="6" data-end="12">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/noon_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/noon_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        6 am - 12 pm
+                    </div>
+                </div>
+                <div class="square-box" onclick="filter(this)" data-type="arrival" data-start="12" data-end="18">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/evening_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/evening_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        12 pm - 6 pm
+                    </div>
+                </div>
+                <div class="square-box" onclick="filter(this)" data-type="arrival" data-start="18" data-end="24">
+                    <div class="filter-img-div">
+                        <div>
+                            <img src="{% static 'amadeuspro/images/night_inactive.png' %}" alt="" data-statefor="inactive">
+                            <img src="{% static 'amadeuspro/images/night_active.png' %}" alt="" data-statefor="active" style="display: none;">
+                        </div>
+                    </div>
+                    <div>
+                        After 6 pm
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+       </div>
+
+
+       
+
+      <div Class='row mtop30'>
+        <button class='btn btn-danger text-light'>Filtrer</button>
+      </div>
+
+      </div>
+      <div class='card-footer'>BitMasters 2023</div>
+    </div>  
   </div>
-</div>
-</div>
-</div>
-</div>
-<br><br>
-{% endif %}
-</div>
 
-{% comment %} <script>
-  $('#infovolTab').DataTable({
-    columnDefs: [{
-        orderable: false,
-        targets: [5]
-    }],
-    lengthMenu: [
-        [25, 50, 100, -1],
-        [25, 50, 100, "All"]
-    ]
-});
-$(document).ready(function() {
-  var table = $('#example').DataTable( {
-      lengthChange: false,
-      buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-  } );
+  <div class="col-md-8 ">
+    
+  {% for rf in results %}
 
-  table.buttons().container()
-      .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
-} );
-
-
-</script>  {% endcomment %}
+          <div class="col-md-10"> 
+          <div class="card shadow-black mtop30" id='flightcard'>
+             <div class='row'>
+                <div class='col-md-2' disabled>Ville Arrivee  <i class='fa fa-map-marker'></i><span>{{ rf.4 }}</span></div>
+             </div>
+                <div class="card-body">
+                <div class='col-md-2'>Compagnie <i class='fa fa-x fa-plane'></i><br><br><br><h4>{{ rf.9 }}</h4></div>
+                <div class='col-md-2'>Depart  <i class='fa fa-address-card'></i><br><br><br><h4>{{ rf.5 }}</h4></div>
+                <div class='col-md-2'>Arrivee  <i class='fa fa-x fa-calendar'></i><br><br><br><h4>{{ rf.6 }}</h4></div>
+                <div class='col-md-2'>Sieges dispo  <i class='fa fa-x fa-users'></i><br><br><br><h4>{{ rf.1 }}</h4></div>
+                <div class='col-md-2'>Prix  <i class='fa fa-x fa-bank'></i><br><br><br><h4>{{ rf.11 }}</h4></div>
+                <div class='col-md-1'><button id='reserver' class="btn btn-danger pull-right"> <a href="{% url 'paiement' rf.0 rf.3 rf.5 rf.6 rf.1 rf.9 rf.11 rf.15 %}" class="text-light">Reserver Vol</a> </button></div>
+                {% comment %} {% if  rf.1 == 0 %}
+                <script>
+                  document.getElementById('reserver').style.display='none';
+              </script>
+              {% endif %} {% endcomment %}
+                </div>
+            </div>
+            </div>
+             
+  {% endfor %}
+</div>
+    
+</div>
 
 
 <div class="row">
@@ -113,6 +243,10 @@ $(document).ready(function() {
   {% include 'partials/_paginationFlight.html' %}
   {% endif %}
 </div>
+
+{% endif %}
+
+
 </div>
 
 {% include 'partials/_js.html' %}

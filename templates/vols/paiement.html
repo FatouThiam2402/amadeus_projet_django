@@ -1,0 +1,379 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block maincontent %}
+
+{% comment %} {% if messages %}
+<div class="alert alert-success text-center" id="alert-msg">
+  {% for message in messages %}
+  <h3>{{ message }}</h3>
+  {% endfor %}
+</div>
+{% endif %} {% endcomment %}
+
+<link href="{% static 'amadeuspro/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'amadeuspro/css/card.css' %}" rel="stylesheet">
+<style>
+  .each-traveller{
+    justify-content: space-between;
+    margin: 13px 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+    padding: 8px 17px;
+    border-radius: 10px;
+}
+.traveller-head{
+    display: flex;
+    justify-content: space-between;
+}
+.traveller-head h6{
+    color: darkgreen;
+    padding-block-start: 2px;
+}
+.add-traveller{
+    /*margin: 13px;*/
+    padding-block-start: 13px;
+}
+.add-traveller-btn{
+    color: blue;
+    padding: 0;
+    font-size: .9em;
+}
+.add-traveller-btn:hover{
+    color: blue;
+}
+.add-traveller-btn:focus, .add-traveller-btn:active{
+    box-shadow: none;
+}
+.traveller-name{
+    font-weight: 600;
+}
+.delete-traveller button{
+    padding: 0;
+}
+.delete-traveller button:focus, .delete-traveller button:active{
+    box-shadow: none;
+}
+.delete-traveller button:hover{
+    color: red;
+}
+
+
+</style>
+
+
+{% comment %} <div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Reserver et Payer</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'indexpage' %}">Acceuil</a></li>
+          <li class="active">Reservation</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+
+<div class="container-fluid">
+  <div class="row mtop30">
+    <h2 class='text-center'>Payer votre reservation avec nos partenaires</h2>
+    <br>
+    <div class="col-md-12">
+      <div class='col-md-1 col-md-offset-1'>
+        <img src="/media/operateurs/orangemoney.jpg" class='img img-thumbnail img-circle img-responsive' style='inline-size:190px; block-size:150px;'>
+      </div>
+      <div class='col-md-1 col-md-offset-2'>
+        <img src="/media/operateurs/paypal.png" class='img img-thumbnail img-circle img-responsive' style='inline-size:190px; block-size:150px;'>
+      </div>
+      <div class='col-md-1 col-md-offset-2'>
+        <img src="/media/operateurs/stripe.png" class='img img-thumbnail img-circle img-responsive' style='inline-size:190px; block-size:150px;'>
+      </div>
+      <div class='col-md-1 col-md-offset-2'>
+        <img src="/media/operateurs/wave.jpeg" class='img img-thumbnail img-circle img-responsive' style='inline-size:190px; block-size:150px;'>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+  <div class="col-md-6">
+    <div class="card mtop30 ">
+      <div class="card-header bg-info "><h1 class='text-danger'>Fiche de Reservation <i class="fa fa-calendar"></i></h1></div>
+      <div class="card-body">
+      <form class='form-horizontal'>
+  <!-- Contact Details -->
+  {% if user.is_authenticated %}
+      <fieldset class="first-section">
+        <legend class='text-center'><h3 class='text-info'>Details du Client <i class='fa fa-user'></i></h3></legend>
+
+        <div class="input-group input-group-lg">
+          <span class='badge badge-danger pull-left'><h3>Utilisateur</h3></span> 
+          <span class='pull-right' style='padding-inline-start: 120px;'><h3>{{ user.username}} </h3></span>
+        </div>
+        <br>
+        
+        <div class="input-group input-group-lg">
+          <span class='badge badge-danger pull-left'><h3>Nom Complet</h3></span> 
+          <span class='pull-right' style='padding-inline-start: 50px;'><h3>{{ user.first_name}}    {{ user.last_name}}</h3></span>
+        </div>
+        <br>
+
+        <div class="input-group input-group-lg">
+          <span class='badge badge-danger pull-left'><h3>Mail</h3></span> 
+          <span class='pull-right' style='padding-inline-start: 120px;'><h3>{{ user.email}} </h3></span>
+        </div>
+
+
+      </fieldset>
+    {% else %}
+    <div class="alert alert-success" id="alert-msg">
+      <p>Se connecter pour reserver</p>
+      <script>
+        const vp = document.querySelector('#validerpaiement');
+        console.log(vp);
+        vp.style.display='none';
+      </script>
+    </div>
+    {% endif %}
+
+
+      <br>
+      <fieldset class="second-section">
+        <legend class='text-center'> <h3 class='text-info'> Details du Vol <i class='fa fa-plane'></i></h3></legend>
+
+        <div class="input-group">
+          <span class='badge badge-danger pull-left'><h3>Numero Vol</h3></span> 
+          <span class='pull-right' style='padding-inline-start: 130px;'><h3>{{ numvol}} </h3></span>
+          </div>
+        <br>
+
+        <div class="input-group">
+          <span class='badge badge-danger pull-left'><h3>Heure depart</h3></span> 
+          <span class='pull-right' style='padding-inline-start: 120px;'><h3>{{ hdpt}} </h3></span>
+        </div>
+        <br>
+
+        <div class="input-group">
+          <span class='badge badge-danger pull-left'><h3>Heure arrivee</h3></span> 
+          <span class='pull-right' style='padding-inline-start: 120px;'><h3>{{ harriv}} </h3></span>
+        </div>
+        <br>
+
+        <div class="input-group">
+          <span class='badge badge-danger pull-left'><h3>Sieges disponibles</h3></span> 
+          <span class='pull-right' style='padding-inline-start: 120px;'><h3>{{ siegedispo}} </h3></span>
+          
+        </div>
+        <br>
+
+      </fieldset>
+
+
+      <!-- Personal Information -->
+      <fieldset class="second-section">
+        <legend class='text-center'><h3 class='text-info'> Espace Passager </h3></legend>
+
+        <div class="traveller-details individual-traveller-div">
+          <div class="traveller-head">
+              <h6><span>0</span> Passagers</h6>
+          </div>
+          <hr>
+          <input type="hidden" id="p-count" name="passengersCount" value="0">
+          <div class="each-traveller-div">
+          </div>
+          <div class="row each-traveller no-traveller">
+              <div>
+                  <span class="traveller-name"></span>
+                  Veuillez ajouter au moins un Passager
+              </div>
+          </div>
+          <div class="row add-traveller-div collapse" id="collapseExample">
+              <div class="note-name"><span>IMPORTANT :</span> Veuillez entrez votre nom</div>
+              <div class="row form-group add-traveller-div-name">
+                  <div class="col">
+                      <input type="text" class="form-control" id="fname" placeholder="Prenom">
+                  </div>
+                  <div class="col">
+                      <input type="text" class="form-control" id="lname" placeholder="nom">
+                  </div>
+              </div>
+              <center>
+              <button type="button" class="btn btn-primary btn-light" style="margin-inline-end: auto;" onclick="add_traveller()">Ajouter</button>
+              </center>
+          </div>
+          <hr>
+          <div class="add-traveller">
+              <button class="submit-btn add-traveller-btn text-uppercase btn"  type="button" data-toggle="collapse" data-target="#collapseExample"><h3 class='text-light'>+ Ajouter Passager</h3></button>
+          </div>
+      </div>
+  
+      </fieldset>
+
+      <div class='btn-group-lg mtop30'>
+        {% comment %} <button class='btn btn-warning'>Annuler</button> {% endcomment %}
+      {% comment %} <button class='btn btn-success'>Valider la Reservation</button> {% endcomment %}
+      </div>
+    </form>
+     </div>
+    </div>
+  </div>
+
+  {% comment %} PAIEMENT {% endcomment %}
+  <div class="col-md-4">
+    <div class="card mtop30">
+      <div class="card-header bg-success"><h1 class='text-success'>Paiement <i class="fa fa-bank"></i></h1></div>
+      <div class="card-body">
+      <form method='POST' action="{% url 'reserver' %}">
+        {% csrf_token %}
+      <fieldset class="first-section">
+
+        <div class="input-group">
+            <span class='badge badge-inverse pull-left'><h3>Montant</h3></span> 
+            <span class='pull-right' style='padding-inline-start: 150px;'><b><h1>{{ prix }}</h1></b></span>
+        </div>
+        <br><br>
+        <div class="input-group input-group-lg">
+          <span class='badge badge-danger pull-left'><h3>Devise paiement</h3></span>
+          <span class='pull-right' style='padding-inline-start: 80px;'>
+            <select name='devise' class='form-select'>
+            <option value="euro">EUROS _ E</option>
+            <option value="dollards">DOLLARDS - $</option>
+            <option value="livres">LIVRES - £</option>
+            </select>
+          </span>
+        </div>
+        <br><br>
+        <div class="input-group input-group-lg">
+          <span class='badge badge-danger pull-left'><h3>operateurs</h3></span>
+          <span class='pull-right' style='padding-inline-start: 140px;'>
+            <select name='operateurs' class='form-select'>
+            <option value="orangemoney">Orange money</option>
+            <option value="free">Free</option>
+            <option value="paypal">PayPal</option>
+            <option value="stripe">Stripe</option>
+            </select>
+          </span>
+        </div>
+
+
+      </fieldset>
+      <br><br>
+      <center>
+      <button class='submit-btn' id='validerpaiement'><a href="{% url 'reserver' %}"><h3 class='text-light'>Valider le Paiement</h3></a></button>
+      </center>
+    </form>
+     </div>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+</div>
+
+<br><br>
+
+  <script src="{% static 'amadeuspro/js/script.js' %}"></script>
+  <script src="{% static 'amadeuspro/js/scriptvol.js' %}"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      flight_duration();
+  });
+  
+  function flight_duration() {
+      document.querySelectorAll(".duration").forEach(element => {
+          let time = element.dataset.value.split(":");
+          element.innerText = time[0]+"h "+time[1]+"m";
+      });
+  }
+  
+  
+  function add_traveller() {
+      let div = document.querySelector('.add-traveller-div');
+      let fname = div.querySelector('#fname');
+      let lname = div.querySelector('#lname');
+      if(fname.value.trim().length === 0) {
+          alert("Veuillez entrez votre prenom..");
+          return false;
+      }
+  
+      if(lname.value.trim().length === 0) {
+          alert("Veuillez entrez votre nom.");
+          return false;
+      }
+  
+
+  
+      let passengerCount = div.parentElement.querySelectorAll(".each-traveller-div .each-traveller").length;
+  
+      let traveller = `<div class="row each-traveller">
+                          <div>
+                              <span class="traveller-name">${fname.value} ${lname.value}</span><span>,</span>
+                          </div>
+                          <input type="hidden" name="passenger${passengerCount+1}FName" value="${fname.value}">
+                          <input type="hidden" name="passenger${passengerCount+1}LName" value="${lname.value}">
+                          <input type="hidden" name="passenger${passengerCount+1}Gender" value="${gender_val}">
+                          <div class="delete-traveller">
+                              <button class="btn" type="button" onclick="del_traveller(this)">
+                                  <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  </svg>
+                              </button>
+                          </div>
+                      </div>`;
+      div.parentElement.querySelector(".each-traveller-div").innerHTML += traveller;
+      div.parentElement.querySelector("#p-count").value = passengerCount+1;
+      div.parentElement.querySelector(".traveller-head h6 span").innerText = passengerCount+1;
+      div.parentElement.querySelector(".no-traveller").style.display = 'none';
+      fname.value = "";
+      lname.value = "";
+  
+      let pcount = document.querySelector("#p-count").value;
+      let fare = document.querySelector("#basefare").value;
+      let fee = document.querySelector("#fee").value;
+      if (parseInt(pcount)!==0) {
+          document.querySelector(".base-fare-value span").innerText = parseInt(fare)*parseInt(pcount);
+          document.querySelector(".total-fare-value span").innerText = (parseInt(fare)*parseInt(pcount))+parseInt(fee);
+      }
+  
+  }
+  
+  function del_traveller(btn) {
+      let traveller = btn.parentElement.parentElement;
+      let tvl = btn.parentElement.parentElement.parentElement.parentElement;
+      let cnt = tvl.querySelector("#p-count");
+      cnt.value = parseInt(cnt.value)-1;
+      tvl.querySelector(".traveller-head h6 span").innerText = cnt.value;
+      if(parseInt(cnt.value) <= 0) {
+          tvl.querySelector('.no-traveller').style.display = 'block';
+      }
+      traveller.remove();
+      
+      let pcount = document.querySelector("#p-count").value;
+      let fare = document.querySelector("#basefare").value;
+      let fee = document.querySelector("#fee").value;
+      if (parseInt(pcount) !== 0) {
+          document.querySelector(".base-fare-value span").innerText = parseInt(fare)*parseInt(pcount);
+          document.querySelector(".total-fare-value span").innerText = (parseInt(fare)*parseInt(pcount))+parseInt(fee);   
+      }
+  }
+  
+  function book_submit() {
+      let pcount = document.querySelector("#p-count");
+      if(parseInt(pcount.value) > 0) {
+          return true;
+      }
+      alert("Please add atleast one passenger.")
+      return false;
+  }
+  </script>
+
+{% endblock maincontent %}

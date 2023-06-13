@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amadeus Pro | BitMasters</title>
+  {% include 'partials/_css.html' %}
+
+</head>
+
+
+<body>
+  <div class="wrapper">
+
+    {% include 'accounts/_header.html' %}
+    {% include 'partials/_sidebar.html' %}
+    {% comment %} {% include 'partials/_slider.html' %} {% endcomment %}
+    {% block maincontent %}
+
+    {% endblock maincontent %}
+
+    {% include 'partials/_footer.html' %}
+    {% include 'partials/_js.html' %}
+
+</body>
+
+</html>

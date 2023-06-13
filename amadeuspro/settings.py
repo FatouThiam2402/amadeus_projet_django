@@ -28,7 +28,6 @@ SECRET_KEY = '2y3*%r@d)w5+9@*)i3tdar5q)=^rl^o@zii7)3m4#l^xmr&cqt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,12 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hotel',
-    'inscription',
+    'mainpage',
     'vols',
     'my_hotel',
-    'reservation',
-    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -148,5 +144,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'dioufm65@yahoo.com'
-EMAIL_HOST_PASSWORD = 'XpertE0!'
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'moseesjoof42@gmail.com'
+EMAIL_HOST_PASSWORD = 'fudysdmggxngufoy'
+
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'yahoo.com',
+]

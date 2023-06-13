@@ -1,24 +1,28 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.urls import reverse
 from django.utils import timezone
 from django.core.paginator import Paginator
-import mysql.connector
+import mysql.connector as sql
+from datetime import datetime
 from django.views.generic import ListView
 from django.contrib import messages
 from django.db import connection
+from amadeus import Client, ResponseError, Location
+from django.contrib.auth import authenticate, login, logout
 
 
 # Établir une connexion à la base de données
-connection = mysql.connector.connect(
+connection = sql.connect(
         host='localhost',
         user='Moussa',
         password='root123',
         database='amadeus'
 )
 
-from amadeus import Client, ResponseError, Location
+
 amadeus = Client(
     client_id='CoArtPgeKZ5667oYQFCkFCBsv5PeV43Q',
     client_secret='PbkxxwJuP5xL5aqX'
@@ -27,23 +31,70 @@ amadeus = Client(
 
 
 def index(request) :
- 	return render(request, 'vols/choixvol.html')
+    if request.method == 'POST':
+        origin = request.POST.get('origin')
+        destination = request.POST.get('destination')
+        depart_date = request.POST.get('departureDate')
+        seat = request.POST.get('SeatClass')
+        trip_type = request.POST.get('TripType')
+        if(trip_type == '1'):
+            return render(request, 'vols/choixvol.html', {
+            'origin': origin,
+            'destination': destination,
+            'depart_date': depart_date,
+            'seat': seat.lower(),
+            'trip_type': trip_type
+        })
+        elif(trip_type == '2'):
+            return_date = request.POST.get('returnDate')
+            return render(request, 'vols/choixvol.html', {
+            'origin': origin,
+            'destination': destination,
+            'depart_date': depart_date,
+            'seat': seat.lower(),
+            'trip_type': trip_type,
+            'return_date': return_date
+        })
+    else:
+        return render(request, 'vols/choixvol.html')
  	
+ 
+
+
+# def seConnecter(request):
+#     if request.method == "POST":
+#         username = request.POST["User_Email"]
+#         password = request.POST["User_Password"]
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return HttpResponseRedirect(reverse("index"))
+            
+#         else:
+#             return render(request, 'vols/login.html', {
+#                 "errors": "Nom d utilisateur et/ou mot de passe incorrect(s)."
+#             })
+#     else:
+#         if request.user.is_authenticated:
+#             return HttpResponseRedirect(reverse('index'))
+#         else:
+#             return render(request, 'vols/login.html')
  	
 
 def toutLesVols(request):
-
+    template_name='vols/voldispo.html'
     cursor = connection.cursor()
     # adults = request.POST.get('adults')
     origin = request.POST.get('origin')
     destination = request.POST.get('destination')
-    # departureDate = request.POST.get('departureDate')
-    # returnDate = request.POST.get('returnDate')
-    # if not adults:
-    #     adults = 1
+    departureDate = request.POST.get('departureDate')
+    
+    # depart_date = datetime.strptime(returndate, "%Y-%m-%d")
+    trip_type = request.POST.get('TripType')
+    classe = request.POST.get('cabin')
     if request.method == "POST" :
         if origin != '' or destination != '':
-            query = "SELECT * FROM Vol WHERE  AeroportDepart LIKE %s AND AeroportArrivee LIKE %s "
+            query = "SELECT * FROM Vol WHERE  origin LIKE %s AND destination LIKE %s "
             parameters = ('%' + origin + '%', '%' + destination + '%') 
          
         else :
@@ -51,19 +102,31 @@ def toutLesVols(request):
             return render(request, 'vols/choixvol.html')
     cursor.execute(query, parameters)
     results = cursor.fetchall()
+    print(results)
+    # |time:"H:i:s"
+    # row = cursor.fetchone()
+    # while row is not None:
+    #     compagnie = row[9]
+    #     column2_value = row[1]
     if(len(results)< 0):
         flightdatas = 'no info'
         context = {'results': flightdatas}
         return render(request, 'vols/voldispo.html', context) 
-    paginator = Paginator(results, 10)
-    page = request.GET.get('page')
-    flightdatas = paginator.get_page(page)
-    context = {'results': flightdatas}
+    context = {'results': results, 'origin': origin, 'destination':destination, 'depart':departureDate, 'classe':classe}
     # cursor.close()
     # connection.close()
-    return render(request, 'vols/voldispo.html', context)    
+    return render(request, template_name, context)    
 
-
+def paiement(request, idvol, villedpt, hdpt, harriv, siegedispo, compagnie, prix, numvol) :
+        if request.user.is_authenticated:
+                context = {'idvol': idvol, 'villedpt':villedpt, 'hdpt' : hdpt, 
+                           'harriv': harriv, 'siegedispo':siegedispo,
+                           'compagnie': compagnie, 'prix': prix, 'numvol': numvol}
+                return render(request, 'vols/paiement.html', context)
+        else:
+                return HttpResponseRedirect(reverse("seConnecter"))
+            
+            
 class galerie_vol(ListView):
     cursor = connection.cursor()
     template_name = 'vols/galerieVol.html'
@@ -76,26 +139,37 @@ class galerie_vol(ListView):
     paginate_by = 8
     # return render(request, template_name, context) 
     
+    
+    
+    
 def voirdestination(req, param):
     cursor = connection.cursor()
     if req.method == "GET":
         template_name='vols/voldispo.html'
-        query = "SELECT * FROM Vol WHERE  AeroportArrivee LIKE %s"
+        query = "SELECT * FROM Vol WHERE origin LIKE %s"
         parameters=[param]
-        print(parameters)
         cursor.execute(query, parameters)
         results = cursor.fetchall()
-        print(results)
         context = {'results': results}
         return render(req, template_name, context) 
         
           
          
-
-def reserverVol(request):
+def filtervol(req, param):
+    cursor = connection.cursor()
+    if req.method == "GET":
+            query = "SELECT * FROM Vol WHERE origin LIKE %s"
+            parameters=[param]
+            template_name='vols/galerieVol.html'
+            cursor.execute(query, parameters)
+            results = cursor.fetchall()
+            context = {'results': results}
+            return render(req, template_name, context)
+            
+def reserver(request):
     dateres = timezone.now()
     context = {'dateres': dateres}
-    return render(request, 'reservation/paiement.html', context) 
+    return render(request, 'vols/payerReservation.html', context) 
     
 def select_destination(req, param):
     if req.method == "GET":

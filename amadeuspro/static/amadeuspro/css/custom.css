@@ -264,7 +264,7 @@ body .tp0 {
     min-block-size: inherit;
 }
 
-.site-header .navbar.navbar-default {
+.site-header .navbar .navbar-default {
     background: none;
     border: 0px;
     margin: 0px;
@@ -323,7 +323,7 @@ body .tp0 {
     text-align: center;
 }
 
-.nav.navbar-nav.navbar-right>li {
+.nav .navbar-nav .navbar-right>li {
     margin-inline-start: 10px;
 }
 
@@ -334,7 +334,7 @@ body .tp0 {
 .site-header .navbar-default .navbar-nav>.open>a,
 .site-header .navbar-default .navbar-nav>.open>a:focus,
 .site-header .navbar-default .navbar-nav>.open>a:hover {
-    background: green;
+    background: rgb(180, 14, 28);
     color: #fff;
 }
 

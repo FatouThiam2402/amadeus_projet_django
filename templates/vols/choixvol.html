@@ -9,6 +9,103 @@
   {% endfor %}
 </div>
 {% endif %}  {% endcomment %}
+<style>
+
+.marquee-rtl {
+  overflow: hidden; /* important */
+  inline-size:50%; max-inline-size: 30em; /* A ADAPTER */
+}
+.marquee-rtl > div {
+  display: inline-block; /* important */
+  white-space: nowrap; /* important */
+  animation: defilement-rtl 15s infinite linear; /* défilement */
+  cursor: pointer;
+  padding: 10px 2em 10px 100%;
+  color:black;
+}
+.marquee-rtl:hover > div {
+  animation-play-state: paused; /* met en pause le défilement */
+}
+.marquee-rtl > div:first-letter {
+  font-weight: 700;
+  color: green;
+}
+@keyframes defilement-rtl {
+  0% {
+    -webkit-transform: translate(0);
+    transform: translate(0);
+  }
+  100% {
+    -webkit-transform: translate(-100%);
+    transform: translate(-100%);
+  }
+}
+/* ---------------------------- */
+/* texte sur plusieurs lignes automatiquement */
+.marquee-multi-lignes > div { 
+  inline-size:90%; 
+  white-space: normal; /* important */
+}
+
+/* ---------------------------- */
+/* déco */
+h2, p { text-align:center; }
+
+.marquee-rtl {
+  margin: 2em auto;
+  {% comment %} border: 1px solid #F0F0FF; {% endcomment %}
+  {% comment %} box-shadow: 0 .25em .5em #CCC,inset 0 0 1em .25em #CCC; {% endcomment %}
+}
+.marquee-rtl > div {
+  font-size: 1.5em;
+}
+.pl{
+  padding-inline-start:80px;
+}
+
+
+.search-input .autocom-box{
+  position:absolute;
+  z-index:1;
+  border: 1px solid #d4d4d4;
+  border-block-end: none;
+  min-inline-size: 200px;
+  background: black;
+  color : white;
+  padding: 10px 8px;
+  max-block-size: 280px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+ }
+ 
+ ::placeholder{
+     font-size: 100%;
+ }
+ .search-input.active .autocom-box{
+     padding: 10px 8px;
+     opacity: 1;
+     pointer-events: auto;
+ }
+ 
+ .search-input.active .autocom-box li{
+     display: block;
+ }
+ 
+ .autocom-box li{
+     list-style: none;
+     padding: 8px 12px;
+     inline-size: 100%;
+     cursor: default;
+     border-radius: 3px;
+     display: none;
+ }
+ 
+ .autocom-box li:hover{
+     background: orange;
+ }
+
+</style>
 
 <link href="{% static 'amadeuspro/css/style.css' %}" rel="stylesheet">
 
@@ -21,29 +118,46 @@ https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css {% endcomment
 
 <div class="row">
 <div class="col-md-10 col-md-offset-1 mt-auto">
-  <center><h1 class="text-light">Bienvenue dans la Plateforme de Reservation de Vols</h1></center>
+  <center><h1 class="marquee-rtl"><div><h1>Bienvenue dans la Plateforme de Reservation de Vols</h1></div></h1></center>
     <div class="main-content padding-0">
   <section class="appointment-form colorTransparent">
-    <form method="POST" action="{% url 'toutLesVols' %}">
-          <br>
-          
+    <form method="POST" action="{% url 'toutLesVols' %}">          
           {% csrf_token %}
-          <center><legend class='text-white'>Remplir le formulaire</legend></center>
+          <center><legend><h2 class='text-light'>Reserver pour des vols internationaux</h2></legend></center>
+        <div class='row'>
+          <div class="col-md-2 form-group align-items-start flex-column form-check-inline">
+            <label class="form-check-label">
+            <input type="radio" class="form-check-input trip-type" id="one-way" name="TripType" value="1" checked>Aller Simple
+            </label>
+        </div>
+        <div class="form-check-inline">
+            <label class="form-check-label">
+              {% comment %} {% if trip_type == '2' %}checked{% endif %} {% endcomment %}
+            <input type="radio" class="form-check-input trip-type" id="round-trip" name="TripType" value="2" {% if trip_type == '2' %}checked{% endif %}>Aller Retour
+            </label>
+        </div>
+        </div>
         <div class="row">
              <div class="col-md-2 form-group align-items-start flex-column">
                <h3 class="text-light"> Lieu </h3>
           </div>
           <div class="col-md-4 form-group align-items-start flex-column">
-                        <label for="origin" class="d-inline-flex">De</label>
-                        <input type="text" placeholder="Ville ou Aeroport" class="form-control" id="origin" name="origin" required>
-                        <div id="fromLocationData"></div>
+                        <label for="origin" class="d-inline-flex"><i class='fa fa-map-marker fa-2x'></i></label>
+                        <div class="search-input">
+                        <input type="text" placeholder="Ville ou Aeroport" class="form-control" id="origin" name="origin" required autocomplete='off'>
+                        <div class="autocom-box"></div>
+                        </div>
+
                 
           </div>
 
           <div class="form-group col-md-4 align-items-start flex-column">
-                        <label for="depart" class="d-inline-flex">Vers</label>
-                        <input type="text" placeholder="Ville ou Aeroport" class="form-control colorTransparent" id="destination" name="destination" required>
-                        <div id="toLocationData"></div>
+                        <label for="depart" class="d-inline-flex"><i class='fa fa-map-marker fa-2x'></i></label>
+                        <div class="search-input">
+                        <input type="text" placeholder="Ville ou Aeroport" class="form-control colorTransparent" id="destination" name="destination" required autocomplete='off'>
+                        <div class="autocom-box"></div>
+                        </div>
+
             </div>
 
             </div>
@@ -58,18 +172,18 @@ https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css {% endcomment
                <h3 class="text-light"> Date </h3>
                  </div>
                   <div class="form-group col-md-4 align-items-start flex-column">
-                                <label for="departureDate" class=" d-inline-flex">Depart</label>
-                                <input type="date" class="form-control" placeholder="DateDepart" id="departureDate" name="departureDate"
-                                    onkeydown="return false">
+                                <label for="departureDate" class=" d-inline-flex"><i class='fa fa-calendar fa-2x'></i></label>
+                                <input type="date" class="form-control" id="departureDate" name="departureDate"
+                                onkeydown="return false">
                     </div>
 
 
-                    {% comment %} <div class="form-group col-md-4 align-items-start flex-column">
-                                <label for="returnDate" class="d-inline-flex">Retour</label>
-                                <input type="date" placeholder="Dateretour" value=""
+                    <div class="form-group col-md-4 align-items-start flex-column">
+                                <label for="returnDate" class="d-inline-flex"><i class='fa fa-calendar fa-2x'></i></label>
+                                <input type="date" 
                                    class="form-control" id="returnDate"
-                                    name="returnDate">
-                    </div> {% endcomment %}
+                                    name="returnDate" onkeydown="return false" {% if trip_type != '2' %} disabled {% endif %}>
+                    </div> 
 
             </div>
 
@@ -77,10 +191,10 @@ https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css {% endcomment
               <br>
             </div>
 
-        <div class="row">
+        {% comment %} <div class="row">
             <div class="col-md-2 form-group align-items-start flex-column">
                <h3 class="text-light">  Passagers </h3>
-          </div>
+          </div> {% endcomment %}
             {% comment %} <div class="form-group col-md-4 align-items-start flex-column">
               <label for="adults" class="d-inline-flex">Adultes <span > 12+
                             </span></label>
@@ -121,7 +235,7 @@ https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css {% endcomment
                             <option value="1">1</option>
                         </select>
             </div> {% endcomment %}
-             </div>
+             {% comment %} </div> {% endcomment %}
 
 
 
@@ -129,26 +243,26 @@ https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css {% endcomment
                     <div class="col-md-2 form-group align-items-start flex-column">
                        <h3 class="text-light"> Vol</h3>
                   </div>
-                    <div class="form-group col-md-4 align-items-start flex-column">
-                        <label for="cabin" class="d-inline-flex">Classe</label>
-                        <select class="form-select" id="cabin">
+                    <div class="form-group col-md-2 align-items-start flex-column pl">
+                        <label for="cabin" class="d-inline-flex"><i class='fa fa-paper-plane fa-2x'></i></label>
+                        <select class="form-select" id="cabin" name='cabin'>
                             <option value="ECONOMY">Economique</option>
                             <option value="PREMIUM_ECONOMY">Premium Economique</option>
                             <option value="BUSINESS">Business</option>
                             <option value="FIRST">Premiere classe</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4  align-items-start flex-column">
+                    {% comment %} <div class="form-group col-md-4  align-items-start flex-column">
                         <div class="form-check form-switch">
                             <input class="form-check-input align-self-center" type="checkbox" id="directFlights">
                             <label class="form-check-label d-inline-flex align-self-center" for="directFlights">Vol Direct</label>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
         </div>
         <div class="row">
-                <div class="col-md-4 col-md-offset-8">
+                <div class="col-md-4 col-md-offset-4">
                     <center><button 
-                      class="btn btn-success btn-lg" 
+                      class="submit-btn" 
                       onclick="runFly()" 
                       >Chercher</button></center>
               </div>
@@ -175,5 +289,61 @@ https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css {% endcomment
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"
   ></script>
+  <script>
+//je recupere mes elements importants
+const searchwrapper = document.querySelector(".search-input");
+const inputbox      = searchwrapper.querySelector("#origin");
+const inputbox2     = searchwrapper.querySelector("#destination");
+const suggbox       = searchwrapper.querySelector(".autocom-box");
+
+
+  //Si l'utilisateur clique sur le bouton
+  inputbox.onkeyup = (e)=>{
+    let userData = e.target.value; //l'utilisateur entre des données
+    let emptyArray = [];
+    if(userData){
+        emptyArray = suggestion.filter((data)=>{
+            // filtrer  les valeurs du tableau de ses recherches
+            //cela débute quand l'tulisateur tape un mot
+              return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+          });
+  
+              emptyArray = emptyArray.map((data)=>{
+                  return data = '<li>'+ data +'</li>';
+              
+        });
+        console.log(emptyArray);
+        searchwrapper.classList.add("active"); // afficher l'autocomplete
+        showsuggestion(emptyArray);
+        let allList = suggbox.querySelectorAll("li");
+        for (let i = 0; i <allList.length; i++) {
+            allList[i].setAttribute("onclick", "select(this)");
+        }
+        
+    }else{
+        searchwrapper.classList.remove("active"); // cacher l'autocomplete
+    }
+
+   
+  }
+
+  function select(element){
+        let selectUserData = element.textContent;
+        inputbox.value = selectUserData;
+  }
+
+  function showsuggestion(list){
+      let listData;
+      if(!list.length){
+            userValue = inputbox.value;
+            listData ='<li>' + userValue + '</li>';
+
+      }else{
+          listData = list.join('');
+      }
+      suggbox.innerHTML = listData;
+  }
+  let suggestion =['ATL', 'PEK', 'DXB', 'LAX', 'ORD', 'LHR', 'HND', 'HKG', 'PVG', 'CDG', 'AMS', 'DFW', 'CAN', 'FRA', 'IST', 'DEL', 'CGK', 'SIN', 'ICN', 'DEN', 'BKK', 'JFK', 'KUL', 'SFO', 'MAD', 'CTU', 'LAS', 'BCN', 'BOM', 'YYZ', 'SEA', 'CLT', 'LGW', 'SZX', 'TPE', 'MEX', 'KMG', 'MUC', 'MCO', 'MIA', 'PHX', 'SYD', 'EWR', 'MNL', 'SHA', 'XIY', 'FCO', 'IAH', 'NRT', 'SVO', 'CKG', 'DMK', 'MSP', 'GRU', 'BOS', 'SGN', 'DOH', 'HGH', 'DTW', 'JED', 'MEL', 'FLL', 'ORL', 'SAW', 'BOG', 'DME', 'CJU', 'LGA', 'PHL', 'DUB', 'ZRH', 'CPH', 'KIX', 'PMI', 'MAN', 'OSL', 'LIS', 'ARN', 'BWI', 'AYT', 'STN', 'NKG', 'GMP', 'BLR', 'RUH', 'BRU', 'DUS', 'XMN', 'VIE', 'CGO', 'SLC', 'YVR', 'DCA', 'CSX', 'AUH', 'CUN', 'FUK', 'TAO', 'BNE', 'WUH', 'MAA', 'COK', 'HYD', 'TRV', 'CCU', 'AMD', 'CCJ', 'JAI', 'GOI', 'LKO', 'CJB', 'TRZ', 'PNQ', 'IXB', 'GAU', 'VTZ', 'ATQ', 'IXM', 'NAG', 'IXC', 'IXJ', 'SXR', 'IXE', 'IXZ', 'IDR', 'IXA', 'PAT'];
+  </script>
 
 {% endblock maincontent %}
