@@ -24,46 +24,50 @@
 </div>
 <!--inner banner End-->
 
+
 <!--Main Content Start-->
 <div class="container-fluid">
+
+
+<div class="col-md-12">
 <div class="main-content padding-0">
   <section class="appointment-form zoneRechercheVol brad">
-    <form id="flight-form" onsubmit="return validateForm()">
+    <form class=''>
+      <br><br>
         <div class="row">
-          <br><br>
-        </div>
-
-        <div class="row">
-             <div class="col-md-2 form-group align-items-start flex-column">
-               <span class="badge badge-primay"> Information</span>
-          </div>
-          <div class="col-md-2 form-group align-items-start flex-column" >
+             <div class="col-md-2">
+               <h3> Information</h3>
+              </div>
+         
+          <div class="col-md-2 form-group align-items-start flex-column">
                         <label for="origin" class="d-inline-flex">Pays</label>
-                        <select class="form-select-hotel" id="pays">
+                        <select class="form-select form-control" id="pays">
           
                             <option value="" desabled selected >Pays</option>
-                            <option value="SN">Sénégal</option>
-                            <option value="Paris">Paris</option>
-                            <option value="GM">GM</option>
+                            <option value="option2">Sénégal</option>
+                            <option value="option3">Paris</option>
                          </select>
                          
-                        <div id="fromLocationData"></div>
                 
           </div>
 
-          <div class="form-group col-md-2 align-items-start flex-column">
+          <div class="col-md-2 form-group align-items-start flex-column">
                         <label for="depart" class="d-inline-flex">Ville</label>
-                        <select class="form-select-hotel" id="ville">
+                        <select class="form-select form-control" id="pays">
           
                           <option value="" desabled selected >Ville</option>
-                         
+                          <option value="option1">Dakar</option>
+                          <option value="option2">Thiès</option>
+                          <option value="option3">Saint Louis</option>
+                          <option value="option1">Mbour</option>
+                          <option value="option2">Kaolack</option>
                        </select>
                         <div id="toLocationData"></div>
             </div>
 
-          <div class="form-group col-md-2 align-items-start flex-column">
+          <div class="col-md-2 form-group align-items-start flex-column">
                         <label for="departure-date" class=" d-inline-flex">Personne</label>
-                        <select class="form-select-hotel" id="type_personne">
+                        <select class="form-select form-control" id="type_personne">
           
                           <option value="" desabled selected >Type Personne</option>
                           <option value="option1">Enfants</option>
@@ -71,73 +75,60 @@
                           <option value="option3">vieux</option>
                         </select>
             </div>
-
-            <center><button class="btn btn-info" onclick="handleFindFlight()">Rechercher</button></center>
-            
-
-
-        </div>
-
-              <br><br>
-
+            <div class="col-md-2 form-group align-items-start flex-column">
+              <center><button class="btn btn-info " onclick="handleFindFlight()">Rechercher</button></center>
             </div>
-               
-             </div> 
-         </div>
+            <br><br>
+          </div>
+        </div>
     </form>
   </section>
 </div> 
-<p>SONEU NA SI LII</p>
-<p>{{pays_select}}</p>
-<div class="liste-chambre">
-  {% for chambre in chambres %}
-  {% if forloop.counter <= 9 %}
-  <div class="une-chambre">
-    <div class="img-chambre">
-      <img src="{% static chambre.3 %} "/>
+</div>
+
+
+<div class="container-fluid">
+
+  <div class="col-md-10">
+  {% for chambre in object_list %}
+
+  <div class="col-md-3">
+  <div class="card mtop30">
+
+    <div class="card-body">
+      <img src="{% static chambre.3 %} " class='img img-responsive' style='inline-size:450px; block-size:250px;'/>
+    </div>
+
+    <div class="card-footer">
+        <div class="nom-chambre"><span class="les-titres">Hotel: </span>{{ chambre.4 }}</div>
+        <div class="nom-chambre"><span class="les-titres">nom chambre : </span>{{ chambre.0 }}</div>
+        <div class="nom-chambre"><span class="les-titres">prix chambre : </span>{{ chambre.2 }} F 
+        <button type="button" name="reserver" value="RESERVER" class="btn btn-info pull-right ">  
+          <a href="http://127.0.0.1:8000/hotel/reservation/"> RESERVER</a>
       
+          </button>
+      </div>
     </div>
-
-    <div class="nom-chambre"><span class="les-titres">Hotel: </span>{{ chambre.4 }}</div>
-    <div class="nom-chambre"><span class="les-titres">nom chambre : </span>{{ chambre.0 }}</div>
-    <div class="nom-chambre"><span class="les-titres">prix chambre : </span>{{ chambre.2 }} F  <button type="button" name="reserver" value="RESERVER" class="btn-reserver">  
-    <a href="http://127.0.0.1:8000/hotel/reservation/"> Reservation</a>
-
-    </button>
+    
     </div>
+  </div>
+  {% endfor %} 
+  </div>
 
+
+<div class="row">
+  {% if is_paginated %}
+  {% include 'partials/_pagination.html' %}
+  {% endif %}
+</div>
 
 </div>
 
-  {% endif%}
-  {% endfor %}  
-
-</div>
-
-
-
-
-
-
-
-
-
-</div>
 
 <br><br>
 
-<div class="container">
-<div class="row">
-        <div id="flightData">
-            
-        </div>
-</div>
-</div>
 
 
-
-<!-- <script src="{% static 'js/script_hotel.js' %}"></script> -->
-<script src="{% static 'amadeuspro/js/script_hotel.js' %}"></script>
 <script src="{% static 'amadeuspro/js/script.js' %}"></script>
   <script src="{% static 'amadeuspro/js/scriptvol.js' %}"></script>
     <script

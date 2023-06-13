@@ -9,7 +9,7 @@ app_name = "my_hotel"
 
 urlpatterns = [
     
-    path('',views.accueil, name = 'accueil'),
+    path('',views.accueil.as_view(), name = 'accueil'),
     path('reservation/',views.reserver, name = 'reserver'),
 
 ]  

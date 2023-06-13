@@ -1,146 +1,131 @@
-{% load static %}
+{% extends 'base2.html' %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservation de chambre d'hotel </title>
-    <link rel="stylesheet" href="{% static 'amadeuspro/css/style_hotel.css' %}">
-    <link rel="stylesheet" href="{% static 'amadeuspro/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'amadeuspro/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'amadeuspro/css/custom.css' %}">
+{% block maincontent %}
+<!--inner banner-->
+<div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+       <center><h1>Reserver et Payer</h1></center> 
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'index' %}">Acceuil</a></li>
+          <li class="active">Reserver</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!--inner banner End-->
 
-    
+<!--Main Content Start-->
 
-</head>
-<body>
-    <!-- jumbotron -->
-     
-     
+<div class="container-fluid" >
+    <div class="col-md-12"><br/>
+    <center><h3>Payer Votre Réservation Avec Nos Partenaire <i class="fa ga-envelope"></i> </h3></center>  
+    </div><br/><br/>
 
-        <div class="row">
-            <div class="col">
-                <div class="  card-header  bg-info h-50 ">
-                        
+
+  
+<!--inner banner End-->
+
+<!--Main Content Start-->
+<div class="main-content">
+  <div class="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          {% if messages %}
+          <div class="alert alert-success" id="alert-msg">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <form action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
+            <div class="contact-form">
+              <div class="col-md-12">
+                <h3>Information personnelle <i class="fa ga-envelope"></i> </h3>
+              </div><br/>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Nom Utilisateur " name="name" required>
                 </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="email" class="form-control" placeholder="Email " name="email" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Telephone " name="phone" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Adresse" name="subject">
+                </div>
+              </div>
+              
+              
             </div>
-            
+          </form>
         </div>
-
-   
-
-    <div class="container-fluid" >
-       
-        
-            <!-- <div class="badge reserver_payer"> Réservation & Paiement</div> -->
-          <div class="row">
-
-            <div class="col-md-5 col-md-offset-1">
-
-                <div class="card mtop30">
-
-                   
-                    <div class=" card-header bg-info">
-                        <h3>Réservation<i class="fa fa-home"></i></h3>
-                    </div>
-                    <div class="card-body">
-                     <div class="col-md-5">
-                        <div class="bg-light p-3 mb-3">
-                            <label id="date-actuel"> Nom</label>
-                            <input type="text"  class="card-body well" name="date" value="Date actuelle"><br>
-                            
-                          </div>
-                          <div class="bg-light p-3 mb-3">
-                            <label id="date-sortie">Tel </label>
-                            <input type="text"  class="card-body well" name="date" value="date-sortie">
-                          </div>
-                          
-                     </div>
-                     <div class="col-md-5">
-                        <div class="bg-light p-3 mb-3">
-                            <label id="date-actuel"> Date Actuelle</label>
-                            <input type="date"  class="card-body well" name="date" value="Date actuelle"><br>
-                            
-                          </div>
-                          <div class="bg-light p-3 mb-3">
-                            <label id="date-sortie"> Date Sortie</label>
-                            <input type="date"  class="card-body well" name="date" value="date-sortie">
-                          </div>
-                          
-                     </div>
-                     <div class="col-md-5 col-md-offset-3">
-                        <div class="bg-light p-3 mb-3">
-                            <label id="date-sortie"> E-mail</label>
-                            <input type="text"  class="card-body well" name="date" value="date-sortie">
-                          </div>
-                     </div>
-                      
-                      
-                    </div>
-                    <div class="card-footer bg-secondary text-white">
-                      Pied de la carte
-                    </div>
-                  </div>
-
-            </div>
-                
-            <div class="card">
-                    <div class="bg-font  card-title  card-header bg-info">
-                        <h3>Paiement<i class="fa fa-home"></i></h3>
-                    </div>
-                    <div class="card-body">
-                <div class="col-md-5">
-                    <div class="bg-light p-3 mb-3">
-                        <label id="date-actuel"> Montant</label>
-                        <input type="text"  class="card-body well" name="date" value="à Payer"><br>
-                        
-                      </div>
-                      <div class="bg-light p-3 mb-3">
-                        <label id="date-sortie">Paiement</label>
+        <div class="col-md-5">
+          <form action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
+            <div class="contact-form">
+              <div class="col-md-12">
+                <h3>Information Réservation <i class="fa ga-envelope"></i> </h3>
+              </div><br/>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Montant à payer " name="name" required>
+                  
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="input-group">
+                    
                         <select class="card-body well">
                             <option value="Orange money">FCFA</option>
                             <option value="Wave">EUROS</option>
                             <option value="Free money"> DOLLAR</option>
 
                         </select>
-                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                    <div class="input-group">
+                      
+                          <select class="card-body well">
+                              <option value="Orange money">Orange money</option>
+                              <option value="Wave">Wave</option>
+                              <option value="Free money">Free money</option>
+
+                          </select>
+                    </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="date" class="form-control" placeholder="Date de sortie" name="subject">
                 </div>
-                      
-                      <div class="col-md-5">
-                        
-                       
-                          <div class="bg-light p-3 mb-3 ">
-                            <label id="date-sortie"> Opéra</label>
-                            <select class="card-body well">
-                                <option value="Orange money">Orange money</option>
-                                <option value="Wave">Wave</option>
-                                <option value="Free money">Free money</option>
-    
-                            </select>
-                          </div>
-                     </div>
-                     
-                      
-                    </div>
-                    <div class="col-md-5 col-md-offset-">
-                        <button class="btn btn-success" value="Paiement">valider Paiement</button>
-
-                     </div>
-                    <div class="card-footer bg-secondary text-white">
-                  
-                    </div>
-                 
-
-          
-          </div>
-            
+              </div>
               
-           
+              <div class="col-md-12">
+                <div class="input-group text-center">
+                  <input type="submit" class="submit-btn" value="Payer & Envoyer">
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-
-
-    <script src="#"></script>
-</body>
-</html>
- 
+      </div>
+    </div>
+  </div>
+</div>
+<!--Main Content End-->
+{% endblock maincontent %}

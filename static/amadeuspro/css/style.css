@@ -1,0 +1,167 @@
+ .form-group {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-block-end: 20px;
+ }
+ 
+ label {
+     inline-size: 100px;
+     text-align: end;
+     margin-inline-end: 5px;
+     margin-inline-start: 5px;
+ }
+ 
+ .sublabel {
+     color: gray;
+     margin: 4px;
+     font-size: 11px;
+ }
+ 
+ input[type="text"],
+ input[type="date"] {
+     padding: 10px;
+     font-size: 14px;
+ }
+ 
+ button[type="submit"] {
+     padding: 10px 20px;
+     background-color: #0050A0;
+     border: none;
+     cursor: pointer;
+ }
+ 
+ input[type="date"] {
+     position: relative;
+ }
+ 
+ input[type="date"]:before {
+     content: attr(placeholder);
+     position: absolute;
+     inset-block-start: 0;
+     inset-inline-start: 0;
+     inset-inline-end: 0;
+     inset-block-end: 0;
+     background: #fff;
+     color: rgba(0, 0, 0, 0.65);
+     pointer-events: none;
+     line-height: 1.5;
+     padding: 10px 0.5rem 0 0.5rem;
+ }
+ 
+ input[type="date"]:focus:before,
+ input[type="date"]:not([value=""]):before {
+     display: none;
+ }
+ 
+ .custom-bg {
+     background-color: #F7F7F9;
+ }
+ 
+ .form {
+     background-color: #fff;
+     border-radius: 5px;
+     padding: 15px 25px;
+     inline-size: 80%;
+     margin: 0 auto;
+ }
+ 
+ .checkbox {
+     inline-size: 20px !important;
+ }
+ 
+ .first-section input {
+     inline-size: 85%;
+     block-size: 25px;
+     margin-inline-start: 5px;
+ }
+ 
+ .second-section {
+     margin-block-start: 15px;
+ }
+ 
+ .second-section input {
+     inline-size: 80%;
+ }
+ 
+ .proficiency {
+     display: flex;
+     align-items: center;
+ }
+ 
+ .terms {
+     margin-block-start: 15px;
+     display: flex;
+     align-items: center;
+ }
+ /* modal */
+ 
+ #modal-open-btn {
+     margin-block-start: 20px;
+     padding: 1rem 2rem;
+     border: none;
+     background-color: var(--color-sec);
+     color: var(--white);
+     font-size: 1.6rem;
+     font-weight: 600;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: all 0.3s ease-in-out;
+ }
+ 
+ #modal-open-btn:hover {
+     background-color: var(--color-primary);
+ }
+ 
+ .modal {
+     display: none;
+     position: absolute;
+     inset-block-start: 50;
+     inset-inline-start: 50;
+     transform: translate(-50%, -50%);
+     background-color: rgba(0, 0, 0, 0.1);
+     inline-size: 50%;
+     block-size: 50%;
+     z-index: 1;
+ }
+ 
+ .modal-content {
+     inline-size: 50%;
+     position: absolute;
+     inset-block-start: 50%;
+     inset-inline-start: 50%;
+     transform: translate(-50%, -50%);
+     border-radius: 5px;
+     animation: slide ease 0.8s;
+     box-shadow: 5px 5px 5px black;
+     background: rgba(0, 0, 0, 0.9);
+ }
+ 
+ .modal-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-block-end: 1rem;
+ }
+ 
+ .close {
+     font-size: 3rem;
+     cursor: pointer;
+ }
+ 
+ .modal-body {
+     font-size: 1.3rem;
+     line-height: 1.5;
+     margin-block-end: 1rem;
+ }
+ 
+ @keyframes slide {
+     0% {
+         opacity: 0;
+         transform: translate(-50%, -100%);
+     }
+     100% {
+         opacity: 1;
+         transform: translate(-50%, -50%);
+     }
+ }

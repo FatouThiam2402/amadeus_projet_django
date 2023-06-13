@@ -6,14 +6,14 @@ option {
     margin-top: 2%;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* Crée 3 colonnes égales */
-    grid-gap: 10px;
-    /* Espacement entre les images */
+    
+
 }
 
 .img-chambre>img {
     width: 100%;
+  border-radius:85px;
+  
 }
 
 .une-chambre {
@@ -39,7 +39,7 @@ option {
     padding: 10px 20px;
     font-size: 16px;
     border: none;
-    background-color: #074e7e;
+
     color: #ffffff;
     border-radius: 5px;
 }
@@ -52,4 +52,22 @@ option {
   background-color: #074e7e;
   height: 600%;
   width: 100px;
+}
+
+.erreur-password{
+    text-align: center;
+    color: red;
+    font-weight: bold;
+}
+
+.btn-recherche-chambre{ 
+    margin-left: 20px;
+}
+
+.pagination-img{
+    font-weight: bold;
+    margin-top: auto;
+    justify-content: space-between;
+    font-size: large;
+    margin-left: auto;
 }
