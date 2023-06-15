@@ -1,6 +1,9 @@
 {% extends 'base2.html' %}
-
+{% load static %}
 {% block maincontent %}
+
+<link href="{% static 'amadeuspro/css/style_hotel.css' %}" rel="stylesheet">
+
 <!--inner banner-->
 <div class="inner-banner">
   <div class="container">
@@ -24,7 +27,23 @@
 <div class="container-fluid" >
     <div class="col-md-12"><br/>
     <center><h3>Payer Votre Réservation Avec Nos Partenaire <i class="fa ga-envelope"></i> </h3></center>  
-    </div><br/><br/>
+    </div><br/><br/><br/><br/>
+    <div class="row col-md-offset-1">
+        <div class="col-md-3 img-rounded">
+            <img src="{% static 'amadeuspro/images/partenaires/OM.jpeg' %}" class="img-circle" style="width: 200px; height: 100px;" alt="Orange Money">
+        </div>
+        <div class="col-md-3">
+            <img src="{% static 'amadeuspro/images/partenaires/paypal.jpeg' %}" class="img img-responsive  img-circle" style="width: 200px; height: 100px;" alt="PayPal">
+        </div>
+        <div class="col-md-3">
+          <img src="{% static 'amadeuspro/images/stripe.png' %}" class="img img-responsive  img-circle" style="width: 200px; height: 100px;" alt="Stripe">
+        </div>
+        <div class="col-md-3">
+          <img src="{% static 'amadeuspro/images/partenaires/wave.jpeg' %}" class="img img-responsive img-circle" style="width: 200px; height: 100px;" alt="Wave">
+        </div>
+  
+    </div><br/>
+   
 
 
   
@@ -105,6 +124,7 @@
                               <option value="Orange money">Orange money</option>
                               <option value="Wave">Wave</option>
                               <option value="Free money">Free money</option>
+                              <option value="Free money">Strip</option>
 
                           </select>
                     </div>

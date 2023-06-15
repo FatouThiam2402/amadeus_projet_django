@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render
 import mysql.connector
 from  django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password,check_password
 
 
 
@@ -13,7 +14,7 @@ def post(request):
                     password='root123',
                     database='amadeus'
             )
-        
+
             # cursor = connection.cursor()
     #   if request.method == 'POST':
             name  = request.POST.get('nom')
@@ -51,7 +52,7 @@ def post(request):
                                     INSERT INTO Client (nomComplet, telephone, email, adresse,dernierTicketAchete, date_naissance, password1, password2)
                                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                             """
-                        cursor.execute(query, (name, phone, email, adr,vide, date, hash(pass1), hash(pass2) ))
+                        cursor.execute(query, (name, phone, email, adr,vide, date, make_password(pass1), make_password(pass2) ))
 
                 # user = User.objects.create_user(username = email, password = pass1, first_name = name)
                 # user.save()

@@ -6,13 +6,16 @@ option {
     margin-top: 2%;
     width: 100%;
     display: grid;
+    margin-left: 70%;
     
 
 }
 
 .img-chambre>img {
     width: 100%;
-  border-radius:85px;
+    height: 100%;
+  border-radius:10px;
+  margin-left: 30px;
   
 }
 
@@ -70,4 +73,9 @@ option {
     justify-content: space-between;
     font-size: large;
     margin-left: auto;
+}
+
+.icon-des-partenaire{
+
+   border-radius: 50px;
 }

@@ -89,24 +89,23 @@
 
 <div class="container-fluid">
 
-  <div class="col-md-10">
+  <div class="col-md-10 col-md-offset-1">
   {% for chambre in object_list %}
 
   <div class="col-md-3">
   <div class="card mtop30">
 
-    <div class="card-body">
-      <img src="{% static chambre.3 %} " class='img img-responsive' style='inline-size:450px; block-size:250px;'/>
+    <div class="card-body img-chambre d-inline-flex">
+      <img src="{% static chambre.3 %} " class='img img-responsive' style='inline-size:900px; block-size:300px;'/>
     </div>
 
-    <div class="card-footer">
+    <div class="card-footer col-md-offset-1">
         <div class="nom-chambre"><span class="les-titres">Hotel: </span>{{ chambre.4 }}</div>
         <div class="nom-chambre"><span class="les-titres">nom chambre : </span>{{ chambre.0 }}</div>
         <div class="nom-chambre"><span class="les-titres">prix chambre : </span>{{ chambre.2 }} F 
         <button type="button" name="reserver" value="RESERVER" class="btn btn-info pull-right ">  
-          <a href="http://127.0.0.1:8000/hotel/reservation/"> RESERVER</a>
-      
-          </button>
+            <a href="http://127.0.0.1:8000/hotel/reservation/"> RESERVER</a>
+        </button>
       </div>
     </div>
     

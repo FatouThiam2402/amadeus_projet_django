@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages, auth
 from  django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password,check_password
 
 
 connection = mysql.connector.connect(
@@ -43,18 +44,29 @@ def logout(request) :
     return render(request, template_name)
 
 def seConnecter(request):
-  
-    cursor = connection.cursor()
     if request.POST:
         email_user = request.POST['User_Email']
         passwd_user = request.POST['User_Password']
-        user = authenticate(request,username = email_user,password = passwd_user)
-        if user is not None:
-            login(request,user)
-            return HttpResponseRedirect('reservation/reservation.html')
+        with connection.cursor() as cursor:
+            user = "select email,password1 FROM Client where  email = %s AND password1 = %s"
+            params = [email_user,passwd_user]
+            cursor.execute(user,params)
+            user = cursor.fetchone()
+            print("la valeur de la requte",user)
+            if user is not None and check_password(passwd_user,user[1]):
+                    return render('reservation/reservation.html')
+                #  return HttpResponseRedirect('reservation/reservation.html')
+            else:
+                return render (request,'espaceClient/login.html',{'error':'Username or password is incorrect!'})
+                
+             
+        # user = authenticate(request,username = email_user,password = passwd_user)
+        # if user is not None:
+        #     login(request,user)
+        #     return HttpResponseRedirect('reservation/reservation.html')
         
-        else:
-            return render (request,'espaceClient/login.html', {'error':'Username or password is incorrect!'})
+        # else:
+        #     return render (request,'espaceClient/login.html', {'error':'Username or password is incorrect!'})
     else:
         return render (request,'espaceClient/login.html')
         
