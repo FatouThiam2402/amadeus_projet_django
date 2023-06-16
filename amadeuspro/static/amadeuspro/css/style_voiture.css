@@ -96,4 +96,31 @@ button{
   height: 100px;
   background-color: aqua;
 }
+.G1{
+  width: 80%;
+  height: 500px;
+  background-color: cornsilk;
+  border-radius: 10px;
+}
+.G2{
+  width: 100%;
+  height: 100px;
+  background-color: #4CAF50;
+  border-radius: 10%;
+}
+button{
+  width: 20%;
+  height: 50px;
+  position: absolute;
+  margin-right: 50px;
+}
+.G3{
+  font-size: 25px;
+  font-weight:bold ;
+  color: red;
+}
+.G4{
+  font-size: 15px;
+  color: black;
+}
 

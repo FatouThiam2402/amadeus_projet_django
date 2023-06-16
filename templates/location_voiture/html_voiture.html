@@ -10,7 +10,8 @@
 <div class="row">
   <div class="col-md-3">
     
-  <form action="/process_reservation" method="POST">
+  <form action="{% url 'process_recuper' %}" method="POST">
+    {% csrf_token %}
     <!-- <label for="full_name">Nom complet :</label>
     <input type="text" id="full_name" name="full_name" required><br><br>
 
@@ -29,11 +30,11 @@
     <label for="return_time">Heure de retour :</label>
     <input type="time" id="return_time" name="return_time" required><br><br> -->
 
-    <label for="pickup_location">Lieu de prise en charge :</label>
-    <input type="text" id="pickup_location" name="pickup_location" required><br><br>
+     <!-- <label for="pickup_location">date de prise en charge :</label>
+    <input type="date" id="pickup_location" name="pickup_location" required><br><br>
 
-    <label for="return_location">Lieu de retour :</label>
-    <input type="text" id="return_location" name="return_location" required><br><br>
+    <label for="return_location">date de retour :</label>
+    <input type="date" id="return_location" name="return_location" required><br><br>  -->
 
     <label for="vehicle_type">Type de véhicule souhaité :</label>
     <select id="vehicle_type" name="vehicle_type" required>
@@ -52,14 +53,14 @@
     <label for="marque_existent">marque existent :</label>
     <select name="marque" id="">
       {%for car in voitures%}
-      <option value="{{car.1}}">"{{car.1}}"</option>
+      <option value="{{car.1}}" selected>"{{car.1}}"</option>
       {% endfor %}
     </select>
   
     <label for="prix">prix:</label>
     <select name="prix" id="">
     {%for car in voitures%}
-    <option value="{{car.10}}">prix:"{{car.10}}"</option>
+    <option value="{{car.10}}" selected>prix:"{{car.10}}"</option>
     {% endfor %}
   </select>
 
@@ -67,14 +68,14 @@
     <label for="modele">modele existent :</label>
     <select name="modele" id="">
       {%for car in voitures%}
-    <option value="{{car.2}}">"{{car.2}}"</option>
+    <option value="{{car.2}}" selected>"{{car.2}}"</option>
     {% endfor %}
     </select>
     
     <label for="couleur">couleur existent :</label>
     <select name="couleur" id="">
       {%for car in voitures%}
-      <option value="{{car.7}}">:"{{car.7}}"</option>
+      <option value="{{car.7}}" selected>:"{{car.7}}"</option>
       {% endfor %}
     </select>
     
@@ -91,11 +92,16 @@
     <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br><br>
 
     
-    <a href="Dossier personnel/Bureau/Basse_Donne/amadeus_projet_django/templates/location_voiture/bouton_reservation.html"> <input type="submit" value="Réserver" id="reserver"></a>
-    <script src="voiture.js"></script>
+    <!-- <a href="Dossier personnel/Bureau/Basse_Donne/amadeus_projet_django/templates/location_voiture/bouton_reservation.html"> -->
+       
+        <!-- <a href="{% url 'process_recuper' %}"> -->
+          <button type="submit" value="Rechercher" id="reserver" class="btn btn-success">reserver</button>
+        <!-- </a> -->
+        </button>
+      <!-- </a> -->
   </form> 
 </div>
-
+<!-- <script src="voiture.js"></script> -->
 <div class="col-md-9">
 
   {%for car in voitures%}
@@ -104,32 +110,31 @@
       <div class="card">
         
         <div class="card-body">
-      <img src="{% static car.12 %}" alt="" class="imgWindow img-responsive shadow-black">
+      <img src="{% static car.12 %}" alt="" class="img imgWindow img-responsive shadow-black">
     </div>
     <br>
       <div class="card-footer">
-        <div class="propriete">
+        <!-- <div class="propriete"> -->
       <ul>
         <li>marque:"{{car.1}}"</li>
         <li>modele:"{{car.2}}"</li>
         <li>nombre_places:"{{car.3}}"</li>
-        <li>boite_vitesse:"{{car.4}}"</li>
+        <!-- <li>boite_vitesse:"{{car.4}}"</li>
         <li>carburant:"{{car.5}}"</li>
-        <li>climatisation:"{{car.6}}"</li>
+        <li>climatisation:"{{car.6}}"</li> -->
         <li>couleur:"{{car.7}}"</li>
         <li>annee_production:"{{car.8}}"</li>
         <li>prix:"{{car.10}}"</li>
-        <button >choisissez_moi</button>
       </ul>
-    </div>
-      <div class="card"></div>
+      <button >choisissez_moi</button>
     </div> 
     </div> 
-    </div>
+    </div> 
+    
   {%endfor%}
 </div>
 </div>
-</div>
+
 
 
 

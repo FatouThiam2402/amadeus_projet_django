@@ -1,0 +1,31 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block maincontent %}
+<link href="{% static 'amadeuspro/css/style_voiture.css' %}" rel="stylesheet">
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+<div class="G1">
+    <div class="G2">
+        <button>modifier</button>
+    </div>
+    <div >
+    <p class="G3">Aucune voiture disponible </p>
+
+    <p class="G4"> Nous sommes désolés, mais les sociétés avec lesquelles nous travaillons dans cette destination n'ont aucune voiture disponible.</p>
+        <p class="G4"> Que puis-je faire ?</p>
+        <p class="G4"> Vous pouvez essayer de : </p>
+        <p class="G4">
+            <ul>
+               <li> changer la date ou l'heure de prise en charge</li>
+                <li> changer la date ou l'heure de restitution</li> 
+                <li> rechercher une voiture dans une destination à proximité</li>
+            </ul>
+        </p>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+{% endblock maincontent %}
