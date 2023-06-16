@@ -5,12 +5,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('hotel.urls')),
-    path('inscription/', include('inscription.urls')),
+    path('', include('mainpage.urls')),
     path('vols/', include('vols.urls')),
-    path('hotel/', include('my_hotel.urls')),
-    path('', include('espaceClient.urls')),
-]   
+    path('my_hotel/', include('my_hotel.urls')),
+    path('reservation/', include('reservation.urls')),
+    path('location_voiture/', include('location_voiture.urls')),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
