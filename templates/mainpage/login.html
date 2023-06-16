@@ -18,7 +18,7 @@
              </div>
              <div class="card-body colorTransparent">
               {% if errors %}
-                <p style="color:red">Le nom d'utilsiateur et le mot de passe ne sont pas conformes.</p>
+                <p style="color:red">Le nom d'utilsateur et le mot de passe ne sont pas conformes.</p>
                 {% endif %}
                 <form style="margin-block-start:50px;" method="POST" action="{% url 'seConnecter' %}"  >
                   {% csrf_token %}
@@ -36,7 +36,7 @@
                     <button style="margin-block-start:30px;"  type="submit" class="btn btn-danger btn-lg" name="">Se connecter</button>
                   </div>
                </form>
-               <span>Pas encore Membre ?<span class="text-info"> <a href="#">Inscrivez-vous!</a> </span></span>
+               <span>Pas encore Membre ?<span class="text-info"> <a href="{% url 'sInscrire' %}">Inscrivez-vous!</a> </span></span>
           </div>
           <div class="card-footer colorTransparent text-light">BitMasters / 2023</div>
         </div>

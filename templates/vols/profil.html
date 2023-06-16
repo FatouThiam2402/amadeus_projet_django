@@ -1,0 +1,51 @@
+{% extends 'base2.html' %} 
+{% block maincontent%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12">
+            <div class="card shadow rounded-0">
+                <div class="card-header">
+                    <div class="h5 card-title fw-bold">Mon Profile</div>
+                </div>
+                <div class="card-body" style='font-size:25px;'>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class ='col-md-6'>
+                                    <img src="/media/operateurs/default_profile.png" class='img img-thumbnail img-circle img-responsive' style='inline-size:300px; block-size:300px;'>
+                                </div>
+                               <div class ='col-md-6'>
+                                <table class='table table-condensed table-hover'>
+                                    <tr class="text-muted">
+                                        <td><span class='badge badge-info'>Nom complet</span></td>
+                                        <td class="text-dark">{{ user.first_name }} {{ user.last_name }}</td>
+                                    </tr>
+                                    
+                                    <tr class="text-muted">
+                                        <td><span class='badge badge-info'>Email</span></td>
+                                        <td class="ps-4">{{ user.email }}</td>
+                                    </tr>
+                                    
+                                    <tr class="text-muted">
+                                        <td><span class='badge badge-info'>Nom Utilisateur</span></td>
+                                        <td class="ps-4">{{ user.username }}</td>
+                                    </tr>
+                                    
+                                </table>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex w-100 text-end justify-content-end">
+                        <a href="#" class="btn btn btn-light border btn-sm bg-gradient rounded-0 me-2">Changer mot de passe</a>
+                        <a href="#" class="btn btn btn-primary btn-sm bg-gradient rounded-0">Mis a jour Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+</div>
+{% endblock maincontent%}

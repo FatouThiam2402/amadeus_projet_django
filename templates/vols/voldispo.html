@@ -40,7 +40,7 @@
 
 
 
-{% if results %}
+{% if objets %}
 
 <div class="container-fluid ">
     <div class="row query-data-div mtop30">
@@ -209,7 +209,7 @@
 
   <div class="col-md-8 ">
     
-  {% for rf in results %}
+  {% for rf in objets %}
 
           <div class="col-md-10"> 
           <div class="card shadow-black mtop30" id='flightcard'>
@@ -222,7 +222,8 @@
                 <div class='col-md-2'>Arrivee  <i class='fa fa-x fa-calendar'></i><br><br><br><h4>{{ rf.6 }}</h4></div>
                 <div class='col-md-2'>Sieges dispo  <i class='fa fa-x fa-users'></i><br><br><br><h4>{{ rf.1 }}</h4></div>
                 <div class='col-md-2'>Prix  <i class='fa fa-x fa-bank'></i><br><br><br><h4>{{ rf.11 }}</h4></div>
-                <div class='col-md-1'><button id='reserver' class="btn btn-danger pull-right"> <a href="{% url 'paiement' rf.0 rf.3 rf.5 rf.6 rf.1 rf.9 rf.11 rf.15 %}" class="text-light">Reserver Vol</a> </button></div>
+                <div class='col-md-1'><button id='reserver' class="btn btn-danger pull-right"> <a href="{% url 'paiement' rf.0 rf.3 rf.5 rf.6 rf.1 rf.9 rf.11 rf.15 %}" class='text-light'>Reserver</a>
+                </button></div>
                 {% comment %} {% if  rf.1 == 0 %}
                 <script>
                   document.getElementById('reserver').style.display='none';
@@ -233,16 +234,73 @@
             </div>
              
   {% endfor %}
+
+</div>
+
+<div class="cp-pagination">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% if objets.has_previous %}
+            <li>
+                <a href="?page={{ objets.previous_page_number }}" aria-label="Previous">
+                    Prev
+                </a>
+            </li>
+            {% endif %}
+
+            {% for page_num in paginator.page_range|slice:":5" %}
+            {% if objets.number == page_num %}
+            <li class="active"><a href="">{{ page_num }}</a></li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            {% if objets.has_next %}
+            <li>
+                <a href="?page={{ objets.next_page_number }}" aria-label="Next">
+                    Next
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
     
+{% comment %} <div class="row">
+<div class="cp-pagination">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <span class="step-links">
+                <li>
+                {% if objets.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ objets.previous_page_number }}">previous</a>
+                {% endif %}
+               </li>
+               <li>
+                    <span class="current-page">{{ objets.number }}</span>
+                </li>
+                <li>
+                {% if objets.has_next %}
+                    <a href="?page={{ objets.next_page_number }}">next</a>
+                    <a href="?page={{ objets.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+                </li>
+    </span>
 </div>
+</div>
+</ul>
+</nav>
+</div> {% endcomment %}
 
-
-<div class="row">
+{% comment %} <div class="row">
   {% if is_paginated %}
   {% include 'partials/_paginationFlight.html' %}
   {% endif %}
-</div>
+</div> {% endcomment %}
 
 {% endif %}
 

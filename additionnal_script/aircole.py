@@ -26,7 +26,7 @@ for combination in combinations:
     
     # Envoi de la requete au niveau de API
     response = requests.get(url,headers=headers)
-    
+    <i class='fa fa-user'></i>
     # verification de la réponse du méthode get()
     if response .status_code == 200:
         # conversion de la réponse en JSON

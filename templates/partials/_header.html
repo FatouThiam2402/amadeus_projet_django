@@ -23,15 +23,15 @@
                 <div class="dropdown">
         
                   <button style='margin-inline-end: 40px;border-radius:35px;' type="button" class="btn btn-danger dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
-                    <h4 class='text-light'><i class='fa fa-user'></i> {{ user.first_name }}</h4>
+                    <h4 class='text-light'><i class='fa fa-user'></i> {{ user.username }}</h4>
                   <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                   <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="#">Mes reservations</a>
+                  <a role="menuitem" tabindex="-1" href="{% url 'voirereservations' user.id %}">Mes reservations</a>
                   </li>
                   <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="#">Mon Profil</a>
+                  <a role="menuitem" tabindex="-1" href="{% url 'monProfile' user.id  %}">Mon Profil</a>
                   </li>
                   <li role="presentation" class="divider"></li>
                   <li role="presentation">
@@ -47,7 +47,7 @@
                 {% else %} 
                 <ul class="nav navbar-nav navbar-right">
                   <li><a class="inscription" href="{% url 'sInscrire' %}">Creer Compte</a></li>
-                  <li><a class="connection" href="{% url 'seConnecter' %}"> <i class='fa fa-user'></i>Connexion</a></li>
+                  <li><a class="connection"  href="{% url 'seConnecter' %}"> <i class='fa fa-user'></i>Connexion</a></li>
                   <li> <a id="menu-toggle" href="#" class="toggle"><img src="{% static 'amadeuspro/images/bars.png' %}"
                         alt=""></a> </li>
                 </ul>
@@ -61,7 +61,7 @@
                 <li><a href="{% url 'choixvol' %}"><i class="fa fa-2x fa-plane"></i><br>  Vols</a></li>
 
                 <li><a href="#"><i class="fa fa-2x fa-bus"></i><br>  Autos</a></li>
-                <li><a href="{% url 'choixhotel' %}"><i class="fa fa-2x fa-hotel"></i><br>  Hotel</a></li>
+                <li><a href="#"><i class="fa fa-2x fa-hotel"></i><br>  Hotel</a></li>
 
                 <li><a href="{% url 'contact' %}"><i class="fa fa-2x fa-phone"></i><br>Contact</a></li>
               </ul>

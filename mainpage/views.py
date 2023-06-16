@@ -99,6 +99,6 @@ def contact(request):
                 ['dioufm65@yahoo.com'],
                 fail_silently=False,
             )
-            messages.success(request, " Email envoyez avec succes...")
+        messages.success(request, " Email envoyez avec succes...")
 
         return render(request, template_name)
